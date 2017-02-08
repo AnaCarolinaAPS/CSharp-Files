@@ -34,6 +34,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.btnEnvia = new System.Windows.Forms.Button();
             this.txtText = new System.Windows.Forms.TextBox();
+            this.btnBanco = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // button1
@@ -92,11 +93,22 @@
             this.txtText.Size = new System.Drawing.Size(201, 186);
             this.txtText.TabIndex = 8;
             // 
+            // btnBanco
+            // 
+            this.btnBanco.Location = new System.Drawing.Point(16, 219);
+            this.btnBanco.Name = "btnBanco";
+            this.btnBanco.Size = new System.Drawing.Size(75, 23);
+            this.btnBanco.TabIndex = 14;
+            this.btnBanco.Text = "Cria";
+            this.btnBanco.UseVisualStyleBackColor = true;
+            this.btnBanco.Click += new System.EventHandler(this.btnBanco_Click);
+            // 
             // Quantificacao
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(447, 258);
+            this.Controls.Add(this.btnBanco);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.txtResults);
             this.Controls.Add(this.label3);
@@ -118,5 +130,6 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btnEnvia;
         private System.Windows.Forms.TextBox txtText;
+        private System.Windows.Forms.Button btnBanco;
     }
 }
