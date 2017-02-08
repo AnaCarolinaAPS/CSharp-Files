@@ -28,19 +28,20 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.ListViewGroup listViewGroup1 = new System.Windows.Forms.ListViewGroup("lala", System.Windows.Forms.HorizontalAlignment.Left);
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.btnAlterar = new System.Windows.Forms.Button();
             this.btnExcluir = new System.Windows.Forms.Button();
-            this.lstParticipantes = new System.Windows.Forms.ListBox();
+            this.lstParticipantes = new System.Windows.Forms.ListView();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.cbbGrupo = new System.Windows.Forms.ComboBox();
+            this.label3 = new System.Windows.Forms.Label();
             this.btnCancelar = new System.Windows.Forms.Button();
             this.btnCadastrar = new System.Windows.Forms.Button();
             this.txtCurso = new System.Windows.Forms.TextBox();
             this.txtNome = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.cbbGrupo = new System.Windows.Forms.ComboBox();
             this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -79,11 +80,19 @@
             // 
             // lstParticipantes
             // 
-            this.lstParticipantes.FormattingEnabled = true;
-            this.lstParticipantes.Location = new System.Drawing.Point(19, 19);
+            listViewGroup1.Header = "lala";
+            listViewGroup1.Name = "listViewGroup1";
+            this.lstParticipantes.Groups.AddRange(new System.Windows.Forms.ListViewGroup[] {
+            listViewGroup1});
+            this.lstParticipantes.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None;
+            this.lstParticipantes.Location = new System.Drawing.Point(19, 17);
+            this.lstParticipantes.MultiSelect = false;
             this.lstParticipantes.Name = "lstParticipantes";
-            this.lstParticipantes.Size = new System.Drawing.Size(158, 199);
-            this.lstParticipantes.TabIndex = 0;
+            this.lstParticipantes.Size = new System.Drawing.Size(158, 201);
+            this.lstParticipantes.Sorting = System.Windows.Forms.SortOrder.Ascending;
+            this.lstParticipantes.TabIndex = 4;
+            this.lstParticipantes.UseCompatibleStateImageBehavior = false;
+            this.lstParticipantes.View = System.Windows.Forms.View.SmallIcon;
             this.lstParticipantes.DoubleClick += new System.EventHandler(this.lstParticipantes_DoubleClick);
             // 
             // groupBox1
@@ -102,6 +111,24 @@
             this.groupBox1.TabIndex = 2;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Cadastro de Participantes";
+            // 
+            // cbbGrupo
+            // 
+            this.cbbGrupo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbbGrupo.FormattingEnabled = true;
+            this.cbbGrupo.Location = new System.Drawing.Point(50, 71);
+            this.cbbGrupo.Name = "cbbGrupo";
+            this.cbbGrupo.Size = new System.Drawing.Size(230, 21);
+            this.cbbGrupo.TabIndex = 6;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(6, 74);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(39, 13);
+            this.label3.TabIndex = 5;
+            this.label3.Text = "Grupo:";
             // 
             // btnCancelar
             // 
@@ -155,24 +182,6 @@
             this.label2.TabIndex = 0;
             this.label2.Text = "Curso:";
             // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(6, 74);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(39, 13);
-            this.label3.TabIndex = 5;
-            this.label3.Text = "Grupo:";
-            // 
-            // cbbGrupo
-            // 
-            this.cbbGrupo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbbGrupo.FormattingEnabled = true;
-            this.cbbGrupo.Location = new System.Drawing.Point(50, 71);
-            this.cbbGrupo.Name = "cbbGrupo";
-            this.cbbGrupo.Size = new System.Drawing.Size(230, 21);
-            this.cbbGrupo.TabIndex = 6;
-            // 
             // CadParticipante
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -195,7 +204,6 @@
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.Button btnAlterar;
         private System.Windows.Forms.Button btnExcluir;
-        private System.Windows.Forms.ListBox lstParticipantes;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Button btnCancelar;
         private System.Windows.Forms.Button btnCadastrar;
@@ -205,5 +213,6 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ComboBox cbbGrupo;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.ListView lstParticipantes;
     }
 }

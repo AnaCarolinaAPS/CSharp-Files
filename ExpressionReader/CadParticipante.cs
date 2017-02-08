@@ -18,82 +18,82 @@ namespace ExpressionReader
             InitializeComponent();
         }
 
+        void Limpa_Campos() {
+            txtCurso.Text = "";
+            txtNome.Text = "";
+            if (cbbGrupo.Items.Count > 0) { 
+                cbbGrupo.SelectedIndex = 0;
+            }
+            cbbGrupo.Enabled = true;
+        }
+
         void Carrega_Participantes()
         {
             string sql;
             SQLiteCommand command;
             SQLiteConnection m_dbConnection;
 
-            try
-            {
-                m_dbConnection = new SQLiteConnection("Data Source=apsa.sqlite;Version=3;");
-                m_dbConnection.Open();
-
-                sql = "SELECT * FROM participante GROUP BY id_grupo ORDER BY nome ";
-                command = new SQLiteCommand(sql, m_dbConnection);
-                SQLiteDataReader reader = command.ExecuteReader();
-
-                //Limpa as unidades já carregadas
-                lstParticipantes.Items.Clear();
-
-                //Adiciona todas as unidades encontradas no banco
-                while (reader.Read())
-                    lstParticipantes.Items.Add(reader["nome"]);
-
-                m_dbConnection.Close();
-            }
-            catch
-            {
-                MessageBox.Show("Erro! Não foi possível abrir a base de dados!");
-            }
-        }
-
-        void Carrega_Grupos()
-        {
-            string sql;
-            SQLiteCommand command;
-            SQLiteConnection m_dbConnection;
+            Limpa_Campos();
 
             try
             {
                 m_dbConnection = new SQLiteConnection("Data Source=apsa.sqlite;Version=3;");
                 m_dbConnection.Open();
+                SQLiteDataReader reader;
 
                 sql = "SELECT * FROM grupo ORDER BY nome";
                 command = new SQLiteCommand(sql, m_dbConnection);
-                SQLiteDataReader reader = command.ExecuteReader();
+                reader = command.ExecuteReader();
 
-                //Adiciona todas os grupos encontrados no banco
-                while (reader.Read()) { 
-                    cbbGrupo.Items.Add((reader["nome"]).ToString());
-                }
+                //Limpa combobox
+                cbbGrupo.Items.Clear();
 
-                if (cbbGrupo.Items.Count == 0)
+                //Limpa as lista
+                lstParticipantes.Items.Clear();
+
+                ListViewGroup grupo;
+
+                /*Carrega os Grupos na ListView*/
+                while (reader.Read())
                 {
-                    cbbGrupo.Items.Add("Sem grupo");
+                    cbbGrupo.Items.Add(reader["nome"]);
+                    grupo = new ListViewGroup((reader["nome"]).ToString(), HorizontalAlignment.Left);
+                    lstParticipantes.Groups.Add(grupo);
+
+                    //Adiciona SubItens
+                    sql = "SELECT * FROM participante WHERE id_grupo=" + reader["id_grupo"] + " ORDER BY nome";
+                    //MessageBox.Show("Grupo Id: " + reader["id_grupo"]+"/nNome: "+ reader["nome"]);
+                    //MessageBox.Show(sql);
+                    //sql = "SELECT * FROM participante";
+                    command = new SQLiteCommand(sql, m_dbConnection);
+                    SQLiteDataReader readObj = command.ExecuteReader();
+
+                    //Adiciona todas as unidades encontradas no banco
+                    while (readObj.Read())
+                    {
+                        MessageBox.Show("Participante: " + readObj["nome"].ToString());
+                        lstParticipantes.Items.Add(new ListViewItem(new string[] { readObj["nome"].ToString() }, grupo));
+                    }
+
                 }
 
+                cbbGrupo.SelectedIndex = 0;
                 m_dbConnection.Close();
             }
             catch
             {
                 MessageBox.Show("Erro! Não foi possível abrir a base de dados!");
             }
-        }
+        }      
 
         private void CadParticipante_Load(object sender, EventArgs e)
         {
-            Carrega_Grupos();
             Carrega_Participantes();
-            cbbGrupo.SelectedIndex = 0;
         }
 
         private void btnCancelar_Click(object sender, EventArgs e)
         {
-            txtNome.Text = "";
-            txtCurso.Text = "";
-            cbbGrupo.SelectedIndex = 0;
-            cbbGrupo.Enabled = true;
+            Limpa_Campos();
         }
 
         private void btnCadastrar_Click(object sender, EventArgs e)
@@ -105,7 +105,7 @@ namespace ExpressionReader
             string nome = txtNome.Text.ToString();
             string curso = txtCurso.Text.ToString();
             string grupo = cbbGrupo.SelectedItem.ToString();
-            int id_grupo = 0;
+            string id_grupo = "";
 
             cbbGrupo.Enabled = true;
 
@@ -113,11 +113,32 @@ namespace ExpressionReader
             {
                 m_dbConnection = new SQLiteConnection("Data Source=apsa.sqlite;Version=3;");
                 m_dbConnection.Open();
+                SQLiteDataReader reader;
 
                 int n = 0;
-                sql = "SELECT * FROM participante where nome='" + nome + "'";
+                sql = "SELECT * FROM grupo WHERE nome='" + grupo + "'";
                 command = new SQLiteCommand(sql, m_dbConnection);
-                SQLiteDataReader reader = command.ExecuteReader();
+                reader = command.ExecuteReader();
+
+                n = 0;
+                while (reader.Read())
+                {
+                    id_grupo = reader["id_grupo"].ToString();
+                    n++;
+                }
+
+                if (n == 0)
+                {
+                    MessageBox.Show("Não existem grupos criados./nFavor Criar um grupo!");
+                    return;
+                }
+
+
+                sql = "SELECT * FROM participante WHERE nome='" + nome + "' AND id_grupo = " + id_grupo;
+                command = new SQLiteCommand(sql, m_dbConnection);
+                reader = command.ExecuteReader();
+
+                n = 0;
 
                 //Conta quantos encontrou
                 while (reader.Read())
@@ -125,35 +146,11 @@ namespace ExpressionReader
 
                 if (n > 0)
                 {
-                    sql = "UPDATE participante set curso = '" + curso + "' where nome='" + nome + "'";
+                    sql = "UPDATE participante SET curso = '" + curso + "' WHERE nome='" + nome + "' AND id_grupo = " + id_grupo;
                 }
                 else
                 {
-                    sql = "SELECT * FROM grupo where nome='" + grupo + "'";
-                    command = new SQLiteCommand(sql, m_dbConnection);
-                    reader = command.ExecuteReader();
-
-                    n = 0;
-                    while (reader.Read()) { 
-                        id_grupo = Int32.Parse(reader["id_grupo"].ToString());
-                        n++;
-                    }
-
-                    if (n == 0) {
-                        DialogResult dialogResult = MessageBox.Show("Não existem grupos criados. /n Você deseja criar o grupo 'Sem grupo' ", "Grupos", MessageBoxButtons.YesNo);
-                        if (dialogResult == DialogResult.Yes)
-                        {
-                            sql = "INSERT INTO grupo (id_grupo, nome, descricao) values (NULL, 'Sem grupo' , 'Criado Automaticamente')";
-                            command = new SQLiteCommand(sql, m_dbConnection);
-                            command.ExecuteNonQuery();
-                        }
-                        else if (dialogResult == DialogResult.No)
-                        {
-                            return;
-                        }
-                    }
-
-                    sql = "INSERT INTO participante (id_participante, id_grupo, nome, curso) values (NULL, " + id_grupo + ",'" + nome + "' , '" + curso + "')";
+                    sql = "INSERT INTO participante (id_participante, id_grupo, nome, curso) VALUES (NULL, " + id_grupo + ",'" + nome + "' , '" + curso + "')";
                 }
 
                 command = new SQLiteCommand(sql, m_dbConnection);
@@ -162,7 +159,6 @@ namespace ExpressionReader
                 m_dbConnection.Close();
 
                 Carrega_Participantes();
-                btnCancelar.PerformClick();
             }
             catch
             {
@@ -176,36 +172,56 @@ namespace ExpressionReader
             SQLiteCommand command;
             SQLiteConnection m_dbConnection;
 
-            string nome = lstParticipantes.SelectedItem.ToString();
+            string nome = "";
             string curso = "";
             string grupo = "";
+            string id_grupo = "";
+
+            if (lstParticipantes.SelectedItems.Count > 0)
+            {
+                ListViewItem item = lstParticipantes.SelectedItems[0];
+                nome = item.Text;
+                grupo = item.Group.Header;
+            }
+            else
+            {
+                MessageBox.Show("Selecione um item para alterar!");
+                return;
+            }
 
             try
             {
                 m_dbConnection = new SQLiteConnection("Data Source=apsa.sqlite;Version=3;");
                 m_dbConnection.Open();
+                SQLiteDataReader reader;
 
-                sql = "SELECT * FROM participante where nome='" + nome + "'";
+                #region Select Grupo (id_grupo)
+                /* Busca o nome do grupo para colocar no combobox*/
+                sql = "SELECT * FROM grupo WHERE nome = '" + grupo + "'";
                 command = new SQLiteCommand(sql, m_dbConnection);
-                SQLiteDataReader reader = command.ExecuteReader();
+                reader = command.ExecuteReader();
+
+                while (reader.Read())
+                    id_grupo = (reader["id_grupo"]).ToString();
+                #endregion
+
+                #region Select Participante
+                sql = "SELECT * FROM participante WHERE nome='" + nome + "' AND id_grupo = " + id_grupo;
+                command = new SQLiteCommand(sql, m_dbConnection);
+                reader = command.ExecuteReader();
 
                 //Adiciona todas as unidades encontradas no banco
                 while (reader.Read()) { 
                     curso = (reader["curso"]).ToString();
-
-                    sql = "SELECT * FROM grupo where id_grupo=" + Int32.Parse((reader["id_grupo"]).ToString()) + "";
-                    command = new SQLiteCommand(sql, m_dbConnection);
-                    SQLiteDataReader rd = command.ExecuteReader();
-                    while (rd.Read()) {
-                        grupo = (rd["nome"]).ToString();
-                    }
                 }
+                #endregion
+
                 m_dbConnection.Close();
 
                 txtNome.Text = nome;
                 txtCurso.Text = curso;
-                cbbGrupo.SelectedIndex = cbbGrupo.Items.IndexOf(grupo);
-                MessageBox.Show("Grupo: " + grupo);
+                cbbGrupo.Text = grupo;
+                //MessageBox.Show("Grupo: " + grupo);
                 cbbGrupo.Enabled = false;
             }
             catch
@@ -220,14 +236,40 @@ namespace ExpressionReader
             SQLiteCommand command;
             SQLiteConnection m_dbConnection;
 
-            string nome = lstParticipantes.SelectedItem.ToString();
+            string nome = "";//lstParticipantes.SelectedItem.ToString();
+            string grupo = "";
+            string id_grupo = "";
+
+            if (lstParticipantes.SelectedItems.Count > 0)
+            {
+                ListViewItem item = lstParticipantes.SelectedItems[0];
+                nome = item.Text;
+                grupo = item.Group.Header;
+            }
+            else
+            {
+                MessageBox.Show("Selecione um item para excluir!");
+                return;
+            }
 
             try
             {
                 m_dbConnection = new SQLiteConnection("Data Source=apsa.sqlite;Version=3;");
                 m_dbConnection.Open();
+                SQLiteDataReader reader;
 
-                sql = "DELETE FROM participante where nome='" + nome + "'";
+                #region Select Grupo (id_grupo)
+                /* Busca o nome do grupo para colocar no combobox*/
+                sql = "SELECT * FROM grupo WHERE nome = '" + grupo + "'";
+                command = new SQLiteCommand(sql, m_dbConnection);
+                reader = command.ExecuteReader();
+
+                while (reader.Read())
+                    id_grupo = (reader["id_grupo"]).ToString();
+
+                #endregion
+
+                sql = "DELETE FROM participante WHERE nome='" + nome + "' AND id_grupo = " + id_grupo;
                 command = new SQLiteCommand(sql, m_dbConnection);
                 command.ExecuteReader();
 
@@ -237,13 +279,13 @@ namespace ExpressionReader
             }
             catch
             {
-                MessageBox.Show("Erro! Não foi excluir a unidade!");
+                MessageBox.Show("Erro! Não foi possível excluir!");
             }
         }
 
         private void lstParticipantes_DoubleClick(object sender, EventArgs e)
         {
-            if (lstParticipantes.SelectedItem != null)
+            if (lstParticipantes.SelectedItems.Count > 0)
             {
                 btnAlterar.PerformClick();
             }
