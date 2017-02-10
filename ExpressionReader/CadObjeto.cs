@@ -135,10 +135,10 @@ namespace ExpressionReader
                 {
                     sql = "INSERT INTO objeto (id_objeto, nome, descricao, id_grupo) VALUES (NULL, '" + nome + "' , '" + descricao + "', " + id_grupo + ")";
                 }
-                #endregion
 
                 command = new SQLiteCommand(sql, m_dbConnection);
                 command.ExecuteNonQuery();
+                #endregion
 
                 m_dbConnection.Close();
 

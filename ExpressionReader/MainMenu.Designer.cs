@@ -30,16 +30,16 @@
         {
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.objetosDeEstudoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.participantesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.unidadesDeAnáliseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cadastroToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.resultadosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.objetosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.entradasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.resultadosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.participantesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cadastroToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.resultadosToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.participanteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.gruposToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.resultadosToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.unidadesDeAnáliseToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.cadastrosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.unidadesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.resultadosToolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
@@ -69,24 +69,6 @@
             this.objetosDeEstudoToolStripMenuItem.Size = new System.Drawing.Size(115, 20);
             this.objetosDeEstudoToolStripMenuItem.Text = "Objetos de Estudo";
             // 
-            // participantesToolStripMenuItem
-            // 
-            this.participantesToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.cadastroToolStripMenuItem1,
-            this.resultadosToolStripMenuItem1});
-            this.participantesToolStripMenuItem.Name = "participantesToolStripMenuItem";
-            this.participantesToolStripMenuItem.Size = new System.Drawing.Size(87, 20);
-            this.participantesToolStripMenuItem.Text = "Participantes";
-            // 
-            // unidadesDeAnáliseToolStripMenuItem
-            // 
-            this.unidadesDeAnáliseToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.cadastrosToolStripMenuItem,
-            this.resultadosToolStripMenuItem2});
-            this.unidadesDeAnáliseToolStripMenuItem.Name = "unidadesDeAnáliseToolStripMenuItem";
-            this.unidadesDeAnáliseToolStripMenuItem.Size = new System.Drawing.Size(125, 20);
-            this.unidadesDeAnáliseToolStripMenuItem.Text = "Unidades de Análise";
-            // 
             // cadastroToolStripMenuItem
             // 
             this.cadastroToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -95,12 +77,6 @@
             this.cadastroToolStripMenuItem.Name = "cadastroToolStripMenuItem";
             this.cadastroToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.cadastroToolStripMenuItem.Text = "Cadastros";
-            // 
-            // resultadosToolStripMenuItem
-            // 
-            this.resultadosToolStripMenuItem.Name = "resultadosToolStripMenuItem";
-            this.resultadosToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.resultadosToolStripMenuItem.Text = "Resultados";
             // 
             // objetosToolStripMenuItem
             // 
@@ -114,6 +90,22 @@
             this.entradasToolStripMenuItem.Name = "entradasToolStripMenuItem";
             this.entradasToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.entradasToolStripMenuItem.Text = "Entradas";
+            this.entradasToolStripMenuItem.Click += new System.EventHandler(this.entradasToolStripMenuItem_Click);
+            // 
+            // resultadosToolStripMenuItem
+            // 
+            this.resultadosToolStripMenuItem.Name = "resultadosToolStripMenuItem";
+            this.resultadosToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.resultadosToolStripMenuItem.Text = "Resultados";
+            // 
+            // participantesToolStripMenuItem
+            // 
+            this.participantesToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.cadastroToolStripMenuItem1,
+            this.resultadosToolStripMenuItem1});
+            this.participantesToolStripMenuItem.Name = "participantesToolStripMenuItem";
+            this.participantesToolStripMenuItem.Size = new System.Drawing.Size(87, 20);
+            this.participantesToolStripMenuItem.Text = "Participantes";
             // 
             // cadastroToolStripMenuItem1
             // 
@@ -121,48 +113,57 @@
             this.participanteToolStripMenuItem,
             this.gruposToolStripMenuItem});
             this.cadastroToolStripMenuItem1.Name = "cadastroToolStripMenuItem1";
-            this.cadastroToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
+            this.cadastroToolStripMenuItem1.Size = new System.Drawing.Size(131, 22);
             this.cadastroToolStripMenuItem1.Text = "Cadastros";
-            // 
-            // resultadosToolStripMenuItem1
-            // 
-            this.resultadosToolStripMenuItem1.Name = "resultadosToolStripMenuItem1";
-            this.resultadosToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
-            this.resultadosToolStripMenuItem1.Text = "Resultados";
             // 
             // participanteToolStripMenuItem
             // 
             this.participanteToolStripMenuItem.Name = "participanteToolStripMenuItem";
-            this.participanteToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.participanteToolStripMenuItem.Size = new System.Drawing.Size(142, 22);
             this.participanteToolStripMenuItem.Text = "Participantes";
             this.participanteToolStripMenuItem.Click += new System.EventHandler(this.participanteToolStripMenuItem_Click);
             // 
             // gruposToolStripMenuItem
             // 
             this.gruposToolStripMenuItem.Name = "gruposToolStripMenuItem";
-            this.gruposToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.gruposToolStripMenuItem.Size = new System.Drawing.Size(142, 22);
             this.gruposToolStripMenuItem.Text = "Grupos";
             this.gruposToolStripMenuItem.Click += new System.EventHandler(this.gruposToolStripMenuItem_Click);
+            // 
+            // resultadosToolStripMenuItem1
+            // 
+            this.resultadosToolStripMenuItem1.Name = "resultadosToolStripMenuItem1";
+            this.resultadosToolStripMenuItem1.Size = new System.Drawing.Size(131, 22);
+            this.resultadosToolStripMenuItem1.Text = "Resultados";
+            // 
+            // unidadesDeAnáliseToolStripMenuItem
+            // 
+            this.unidadesDeAnáliseToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.cadastrosToolStripMenuItem,
+            this.resultadosToolStripMenuItem2});
+            this.unidadesDeAnáliseToolStripMenuItem.Name = "unidadesDeAnáliseToolStripMenuItem";
+            this.unidadesDeAnáliseToolStripMenuItem.Size = new System.Drawing.Size(125, 20);
+            this.unidadesDeAnáliseToolStripMenuItem.Text = "Unidades de Análise";
             // 
             // cadastrosToolStripMenuItem
             // 
             this.cadastrosToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.unidadesToolStripMenuItem});
             this.cadastrosToolStripMenuItem.Name = "cadastrosToolStripMenuItem";
-            this.cadastrosToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.cadastrosToolStripMenuItem.Size = new System.Drawing.Size(131, 22);
             this.cadastrosToolStripMenuItem.Text = "Cadastros";
             // 
             // unidadesToolStripMenuItem
             // 
             this.unidadesToolStripMenuItem.Name = "unidadesToolStripMenuItem";
-            this.unidadesToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.unidadesToolStripMenuItem.Size = new System.Drawing.Size(123, 22);
             this.unidadesToolStripMenuItem.Text = "Unidades";
             this.unidadesToolStripMenuItem.Click += new System.EventHandler(this.unidadesToolStripMenuItem_Click);
             // 
             // resultadosToolStripMenuItem2
             // 
             this.resultadosToolStripMenuItem2.Name = "resultadosToolStripMenuItem2";
-            this.resultadosToolStripMenuItem2.Size = new System.Drawing.Size(152, 22);
+            this.resultadosToolStripMenuItem2.Size = new System.Drawing.Size(131, 22);
             this.resultadosToolStripMenuItem2.Text = "Resultados";
             // 
             // sobreToolStripMenuItem

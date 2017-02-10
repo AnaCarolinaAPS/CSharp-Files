@@ -44,5 +44,12 @@ namespace ExpressionReader
             cad.MdiParent = this;
             cad.Show();
         }
+
+        private void entradasToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            CadEntrada cad = new CadEntrada();
+            cad.MdiParent = this;
+            cad.Show();
+        }
     }
 }

@@ -62,16 +62,13 @@ namespace ExpressionReader
 
                     //Adiciona SubItens
                     sql = "SELECT * FROM participante WHERE id_grupo=" + reader["id_grupo"] + " ORDER BY nome";
-                    //MessageBox.Show("Grupo Id: " + reader["id_grupo"]+"/nNome: "+ reader["nome"]);
-                    //MessageBox.Show(sql);
-                    //sql = "SELECT * FROM participante";
                     command = new SQLiteCommand(sql, m_dbConnection);
                     SQLiteDataReader readObj = command.ExecuteReader();
 
                     //Adiciona todas as unidades encontradas no banco
                     while (readObj.Read())
                     {
-                        MessageBox.Show("Participante: " + readObj["nome"].ToString());
+                        //MessageBox.Show("Participante: " + readObj["nome"].ToString());
                         lstParticipantes.Items.Add(new ListViewItem(new string[] { readObj["nome"].ToString() }, grupo));
                     }
 
@@ -129,7 +126,7 @@ namespace ExpressionReader
 
                 if (n == 0)
                 {
-                    MessageBox.Show("Não existem grupos criados./nFavor Criar um grupo!");
+                    MessageBox.Show("Não existem grupos criados.\nFavor Criar um grupo!");
                     return;
                 }
 

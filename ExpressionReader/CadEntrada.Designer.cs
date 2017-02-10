@@ -28,44 +28,44 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.gpbLista = new System.Windows.Forms.GroupBox();
             this.btnAlterar = new System.Windows.Forms.Button();
             this.btnExcluir = new System.Windows.Forms.Button();
-            this.lstObjetos = new System.Windows.Forms.ListBox();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.lstEntradas = new System.Windows.Forms.ListBox();
+            this.gpbEntrada = new System.Windows.Forms.GroupBox();
+            this.cbbParticipante = new System.Windows.Forms.ComboBox();
             this.btnCancelar = new System.Windows.Forms.Button();
             this.btnCadastrar = new System.Windows.Forms.Button();
             this.txtDescricao = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.groupBox4 = new System.Windows.Forms.GroupBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.cbbObjeto = new System.Windows.Forms.ComboBox();
-            this.label4 = new System.Windows.Forms.Label();
-            this.lblGrupoPart = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
-            this.lblDescObj = new System.Windows.Forms.Label();
-            this.clbUnidades = new System.Windows.Forms.CheckedListBox();
+            this.gpbUnidades = new System.Windows.Forms.GroupBox();
             this.btnInfo = new System.Windows.Forms.Button();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.groupBox2.SuspendLayout();
-            this.groupBox1.SuspendLayout();
-            this.groupBox3.SuspendLayout();
+            this.clbUnidades = new System.Windows.Forms.CheckedListBox();
+            this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.cbbGrupo = new System.Windows.Forms.ComboBox();
+            this.lblDescObj = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.cbbObjeto = new System.Windows.Forms.ComboBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.gpbLista.SuspendLayout();
+            this.gpbEntrada.SuspendLayout();
+            this.gpbUnidades.SuspendLayout();
             this.groupBox4.SuspendLayout();
             this.SuspendLayout();
             // 
-            // groupBox2
+            // gpbLista
             // 
-            this.groupBox2.Controls.Add(this.btnAlterar);
-            this.groupBox2.Controls.Add(this.btnExcluir);
-            this.groupBox2.Controls.Add(this.lstObjetos);
-            this.groupBox2.Location = new System.Drawing.Point(505, 85);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(196, 263);
-            this.groupBox2.TabIndex = 7;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Objetos de Estudo";
+            this.gpbLista.Controls.Add(this.btnAlterar);
+            this.gpbLista.Controls.Add(this.btnExcluir);
+            this.gpbLista.Controls.Add(this.lstEntradas);
+            this.gpbLista.Location = new System.Drawing.Point(505, 85);
+            this.gpbLista.Name = "gpbLista";
+            this.gpbLista.Size = new System.Drawing.Size(196, 263);
+            this.gpbLista.TabIndex = 7;
+            this.gpbLista.TabStop = false;
+            this.gpbLista.Text = "Entradas";
             // 
             // btnAlterar
             // 
@@ -75,6 +75,7 @@
             this.btnAlterar.TabIndex = 2;
             this.btnAlterar.Text = "<< Alterar";
             this.btnAlterar.UseVisualStyleBackColor = true;
+            this.btnAlterar.Click += new System.EventHandler(this.btnAlterar_Click);
             // 
             // btnExcluir
             // 
@@ -84,29 +85,41 @@
             this.btnExcluir.TabIndex = 1;
             this.btnExcluir.Text = "Excluir";
             this.btnExcluir.UseVisualStyleBackColor = true;
+            this.btnExcluir.Click += new System.EventHandler(this.btnExcluir_Click);
             // 
-            // lstObjetos
+            // lstEntradas
             // 
-            this.lstObjetos.FormattingEnabled = true;
-            this.lstObjetos.Location = new System.Drawing.Point(19, 19);
-            this.lstObjetos.Name = "lstObjetos";
-            this.lstObjetos.Size = new System.Drawing.Size(158, 199);
-            this.lstObjetos.TabIndex = 0;
+            this.lstEntradas.Font = new System.Drawing.Font("Courier New", 8.25F);
+            this.lstEntradas.FormattingEnabled = true;
+            this.lstEntradas.ItemHeight = 14;
+            this.lstEntradas.Location = new System.Drawing.Point(19, 19);
+            this.lstEntradas.Name = "lstEntradas";
+            this.lstEntradas.Size = new System.Drawing.Size(158, 186);
+            this.lstEntradas.TabIndex = 0;
+            this.lstEntradas.DoubleClick += new System.EventHandler(this.lstEntradas_DoubleClick);
             // 
-            // groupBox1
+            // gpbEntrada
             // 
-            this.groupBox1.Controls.Add(this.comboBox1);
-            this.groupBox1.Controls.Add(this.btnCancelar);
-            this.groupBox1.Controls.Add(this.btnCadastrar);
-            this.groupBox1.Controls.Add(this.txtDescricao);
-            this.groupBox1.Controls.Add(this.label1);
-            this.groupBox1.Controls.Add(this.label2);
-            this.groupBox1.Location = new System.Drawing.Point(12, 85);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(286, 263);
-            this.groupBox1.TabIndex = 6;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Cadastro de Entrada";
+            this.gpbEntrada.Controls.Add(this.cbbParticipante);
+            this.gpbEntrada.Controls.Add(this.btnCancelar);
+            this.gpbEntrada.Controls.Add(this.btnCadastrar);
+            this.gpbEntrada.Controls.Add(this.txtDescricao);
+            this.gpbEntrada.Controls.Add(this.label1);
+            this.gpbEntrada.Controls.Add(this.label2);
+            this.gpbEntrada.Location = new System.Drawing.Point(12, 85);
+            this.gpbEntrada.Name = "gpbEntrada";
+            this.gpbEntrada.Size = new System.Drawing.Size(286, 263);
+            this.gpbEntrada.TabIndex = 6;
+            this.gpbEntrada.TabStop = false;
+            this.gpbEntrada.Text = "Cadastro de Entrada";
+            // 
+            // cbbParticipante
+            // 
+            this.cbbParticipante.FormattingEnabled = true;
+            this.cbbParticipante.Location = new System.Drawing.Point(78, 19);
+            this.cbbParticipante.Name = "cbbParticipante";
+            this.cbbParticipante.Size = new System.Drawing.Size(202, 21);
+            this.cbbParticipante.TabIndex = 6;
             // 
             // btnCancelar
             // 
@@ -116,6 +129,7 @@
             this.btnCancelar.TabIndex = 2;
             this.btnCancelar.Text = "Cancelar";
             this.btnCancelar.UseVisualStyleBackColor = true;
+            this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
             // 
             // btnCadastrar
             // 
@@ -125,6 +139,7 @@
             this.btnCadastrar.TabIndex = 3;
             this.btnCadastrar.Text = "Salvar >>";
             this.btnCadastrar.UseVisualStyleBackColor = true;
+            this.btnCadastrar.Click += new System.EventHandler(this.btnCadastrar_Click);
             // 
             // txtDescricao
             // 
@@ -152,22 +167,40 @@
             this.label2.TabIndex = 0;
             this.label2.Text = "Descrição:";
             // 
-            // groupBox3
+            // gpbUnidades
             // 
-            this.groupBox3.Controls.Add(this.btnInfo);
-            this.groupBox3.Controls.Add(this.clbUnidades);
-            this.groupBox3.Location = new System.Drawing.Point(304, 85);
-            this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(195, 263);
-            this.groupBox3.TabIndex = 8;
-            this.groupBox3.TabStop = false;
-            this.groupBox3.Text = "Unidades de Análise";
+            this.gpbUnidades.Controls.Add(this.btnInfo);
+            this.gpbUnidades.Controls.Add(this.clbUnidades);
+            this.gpbUnidades.Location = new System.Drawing.Point(304, 85);
+            this.gpbUnidades.Name = "gpbUnidades";
+            this.gpbUnidades.Size = new System.Drawing.Size(195, 263);
+            this.gpbUnidades.TabIndex = 8;
+            this.gpbUnidades.TabStop = false;
+            this.gpbUnidades.Text = "Unidades de Análise";
+            // 
+            // btnInfo
+            // 
+            this.btnInfo.Location = new System.Drawing.Point(60, 224);
+            this.btnInfo.Name = "btnInfo";
+            this.btnInfo.Size = new System.Drawing.Size(75, 23);
+            this.btnInfo.TabIndex = 3;
+            this.btnInfo.Text = "Info";
+            this.btnInfo.UseVisualStyleBackColor = true;
+            this.btnInfo.Click += new System.EventHandler(this.btnInfo_Click);
+            // 
+            // clbUnidades
+            // 
+            this.clbUnidades.FormattingEnabled = true;
+            this.clbUnidades.Location = new System.Drawing.Point(19, 19);
+            this.clbUnidades.Name = "clbUnidades";
+            this.clbUnidades.Size = new System.Drawing.Size(158, 199);
+            this.clbUnidades.TabIndex = 0;
             // 
             // groupBox4
             // 
+            this.groupBox4.Controls.Add(this.cbbGrupo);
             this.groupBox4.Controls.Add(this.lblDescObj);
             this.groupBox4.Controls.Add(this.label6);
-            this.groupBox4.Controls.Add(this.lblGrupoPart);
             this.groupBox4.Controls.Add(this.label4);
             this.groupBox4.Controls.Add(this.cbbObjeto);
             this.groupBox4.Controls.Add(this.label3);
@@ -178,83 +211,61 @@
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Objeto de Estudo";
             // 
-            // label3
+            // cbbGrupo
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(6, 25);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(41, 13);
-            this.label3.TabIndex = 0;
-            this.label3.Text = "Objeto:";
-            // 
-            // cbbObjeto
-            // 
-            this.cbbObjeto.FormattingEnabled = true;
-            this.cbbObjeto.Location = new System.Drawing.Point(53, 22);
-            this.cbbObjeto.Name = "cbbObjeto";
-            this.cbbObjeto.Size = new System.Drawing.Size(217, 21);
-            this.cbbObjeto.TabIndex = 1;
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(6, 50);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(121, 13);
-            this.label4.TabIndex = 2;
-            this.label4.Text = "Grupo de Participantes: ";
-            // 
-            // lblGrupoPart
-            // 
-            this.lblGrupoPart.AutoSize = true;
-            this.lblGrupoPart.Location = new System.Drawing.Point(133, 50);
-            this.lblGrupoPart.Name = "lblGrupoPart";
-            this.lblGrupoPart.Size = new System.Drawing.Size(39, 13);
-            this.lblGrupoPart.TabIndex = 3;
-            this.lblGrupoPart.Text = "Grupo ";
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(317, 25);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(58, 13);
-            this.label6.TabIndex = 4;
-            this.label6.Text = "Descrição:";
+            this.cbbGrupo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbbGrupo.FormattingEnabled = true;
+            this.cbbGrupo.Location = new System.Drawing.Point(133, 19);
+            this.cbbGrupo.Name = "cbbGrupo";
+            this.cbbGrupo.Size = new System.Drawing.Size(217, 21);
+            this.cbbGrupo.TabIndex = 6;
+            this.cbbGrupo.SelectedIndexChanged += new System.EventHandler(this.cbbGrupo_SelectedIndexChanged);
             // 
             // lblDescObj
             // 
             this.lblDescObj.AutoSize = true;
-            this.lblDescObj.Location = new System.Drawing.Point(381, 25);
+            this.lblDescObj.Location = new System.Drawing.Point(70, 50);
             this.lblDescObj.Name = "lblDescObj";
             this.lblDescObj.Size = new System.Drawing.Size(55, 13);
             this.lblDescObj.TabIndex = 5;
             this.lblDescObj.Text = "Descricao";
             // 
-            // clbUnidades
+            // label6
             // 
-            this.clbUnidades.FormattingEnabled = true;
-            this.clbUnidades.Location = new System.Drawing.Point(19, 19);
-            this.clbUnidades.Name = "clbUnidades";
-            this.clbUnidades.Size = new System.Drawing.Size(158, 199);
-            this.clbUnidades.TabIndex = 0;
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(6, 50);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(58, 13);
+            this.label6.TabIndex = 4;
+            this.label6.Text = "Descrição:";
             // 
-            // btnInfo
+            // label4
             // 
-            this.btnInfo.Location = new System.Drawing.Point(60, 224);
-            this.btnInfo.Name = "btnInfo";
-            this.btnInfo.Size = new System.Drawing.Size(75, 23);
-            this.btnInfo.TabIndex = 3;
-            this.btnInfo.Text = "Info";
-            this.btnInfo.UseVisualStyleBackColor = true;
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(6, 22);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(121, 13);
+            this.label4.TabIndex = 2;
+            this.label4.Text = "Grupo de Participantes: ";
             // 
-            // comboBox1
+            // cbbObjeto
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(78, 19);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(202, 21);
-            this.comboBox1.TabIndex = 6;
+            this.cbbObjeto.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbbObjeto.FormattingEnabled = true;
+            this.cbbObjeto.Location = new System.Drawing.Point(453, 19);
+            this.cbbObjeto.Name = "cbbObjeto";
+            this.cbbObjeto.Size = new System.Drawing.Size(217, 21);
+            this.cbbObjeto.TabIndex = 1;
+            this.cbbObjeto.SelectedIndexChanged += new System.EventHandler(this.cbbObjeto_SelectedIndexChanged);
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(406, 22);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(41, 13);
+            this.label3.TabIndex = 0;
+            this.label3.Text = "Objeto:";
             // 
             // CadEntrada
             // 
@@ -262,15 +273,16 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(714, 357);
             this.Controls.Add(this.groupBox4);
-            this.Controls.Add(this.groupBox3);
-            this.Controls.Add(this.groupBox2);
-            this.Controls.Add(this.groupBox1);
+            this.Controls.Add(this.gpbUnidades);
+            this.Controls.Add(this.gpbLista);
+            this.Controls.Add(this.gpbEntrada);
             this.Name = "CadEntrada";
             this.Text = "CadEntrada";
-            this.groupBox2.ResumeLayout(false);
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
-            this.groupBox3.ResumeLayout(false);
+            this.Load += new System.EventHandler(this.CadEntrada_Load);
+            this.gpbLista.ResumeLayout(false);
+            this.gpbEntrada.ResumeLayout(false);
+            this.gpbEntrada.PerformLayout();
+            this.gpbUnidades.ResumeLayout(false);
             this.groupBox4.ResumeLayout(false);
             this.groupBox4.PerformLayout();
             this.ResumeLayout(false);
@@ -279,26 +291,26 @@
 
         #endregion
 
-        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.GroupBox gpbLista;
         private System.Windows.Forms.Button btnAlterar;
         private System.Windows.Forms.Button btnExcluir;
-        private System.Windows.Forms.ListBox lstObjetos;
-        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.ListBox lstEntradas;
+        private System.Windows.Forms.GroupBox gpbEntrada;
         private System.Windows.Forms.Button btnCancelar;
         private System.Windows.Forms.Button btnCadastrar;
         private System.Windows.Forms.TextBox txtDescricao;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.GroupBox gpbUnidades;
         private System.Windows.Forms.GroupBox groupBox4;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.ComboBox cbbObjeto;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label lblDescObj;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.Label lblGrupoPart;
         private System.Windows.Forms.Button btnInfo;
         private System.Windows.Forms.CheckedListBox clbUnidades;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.ComboBox cbbParticipante;
+        private System.Windows.Forms.ComboBox cbbGrupo;
     }
 }
