@@ -207,6 +207,8 @@ namespace ExpressionReader
             SQLiteCommand command;
             SQLiteConnection m_dbConnection;
 
+            string grupo = cbbGrupo.Text;
+            string id_grupo = "";
             string objeto = cbbObjeto.Text;
             string id_objeto = "";
             string descricao = "";
@@ -223,8 +225,19 @@ namespace ExpressionReader
                 SQLiteDataReader reader;
                 SQLiteDataReader rdParticipante;
 
+                #region Select Grupo (id_grupo)
+                sql = "SELECT * FROM grupo WHERE nome='" + grupo + "'";
+                command = new SQLiteCommand(sql, m_dbConnection);
+                reader = command.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    id_grupo = (reader["id_grupo"]).ToString();
+                }
+                #endregion
+
                 #region Select Objetos
-                sql = "SELECT * FROM objeto WHERE nome='" + objeto + "'";
+                sql = "SELECT * FROM objeto WHERE id_grupo = " + id_grupo + " AND nome='" + objeto + "'";
                 command = new SQLiteCommand(sql, m_dbConnection);
                 reader = command.ExecuteReader();
 
@@ -270,9 +283,9 @@ namespace ExpressionReader
 
                     entrada = "(" + participante + ")";
                     entrada = entrada + "\"";
-                    max = 18;
+                    max = 30;
 
-                    max = max - entrada.Length;
+                    //max = max - entrada.Length;
 
                     descricao = (reader["descricao"]).ToString();
                     if (descricao.Length < max)
@@ -323,6 +336,7 @@ namespace ExpressionReader
             Limpa_Campos();
 
             string nome = cbbObjeto.Text;
+            string grupo = cbbGrupo.Text;
             string id_grupo = "";
 
             try
@@ -330,6 +344,8 @@ namespace ExpressionReader
                 m_dbConnection = new SQLiteConnection("Data Source=apsa.sqlite;Version=3;");
                 m_dbConnection.Open();
                 SQLiteDataReader reader;
+
+
 
                 #region Select Objetos
                 sql = "SELECT * FROM objeto WHERE nome = '" + nome + "'";
@@ -437,6 +453,8 @@ namespace ExpressionReader
             SQLiteCommand command;
             SQLiteConnection m_dbConnection;
 
+            string grupo = cbbGrupo.Text;
+            string id_grupo = "";
             string participante = cbbParticipante.Text;
             string id_participante = "";
             string descricao = txtDescricao.Text;
@@ -475,18 +493,30 @@ namespace ExpressionReader
             {
                 m_dbConnection = new SQLiteConnection("Data Source=apsa.sqlite;Version=3;");
                 m_dbConnection.Open();
+                SQLiteDataReader reader;
+
+                #region Select Grupo (id_grupo)
+                sql = "SELECT * FROM grupo WHERE nome='" + grupo + "'";
+                command = new SQLiteCommand(sql, m_dbConnection);
+                reader = command.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    id_grupo = (reader["id_grupo"]).ToString();
+                }
+                #endregion
 
                 #region Select Participante (id_participante)
-                sql = "SELECT * FROM participante WHERE nome='" + participante + "'";
+                sql = "SELECT * FROM participante WHERE id_grupo = "+ id_grupo + " AND nome = '" + participante + "'";
                 command = new SQLiteCommand(sql, m_dbConnection);
-                SQLiteDataReader reader = command.ExecuteReader();
+                reader = command.ExecuteReader();
 
                 while (reader.Read())
                     id_participante = (reader["id_participante"]).ToString();
                 #endregion
 
                 #region Select Objeto (id_objeto)
-                sql = "SELECT * FROM objeto WHERE nome='" + objeto + "'";
+                sql = "SELECT * FROM objeto WHERE id_grupo = " + id_grupo + " AND nome='" + objeto + "'";
                 command = new SQLiteCommand(sql, m_dbConnection);
                 reader = command.ExecuteReader();
 
@@ -494,16 +524,14 @@ namespace ExpressionReader
                     id_objeto = (reader["id_objeto"]).ToString();
                 #endregion
 
-
                 #region Select, Update and Insert of Entrada
-                int n = 0;
                 sql = "SELECT * FROM entrada WHERE id_participante=" + id_participante + " AND id_objeto = " + id_objeto;
                 command = new SQLiteCommand(sql, m_dbConnection);
                 reader = command.ExecuteReader();
 
-                //Conta quantos encontrou
+                int n = 0;
                 while (reader.Read())
-                    n++;
+                    n++; //Conta quantos encontrou                
 
                 if (n > 0)
                 {
@@ -583,6 +611,8 @@ namespace ExpressionReader
             SQLiteCommand command;
             SQLiteConnection m_dbConnection;
 
+            string grupo = cbbGrupo.Text;
+            string id_grupo = "";
             string entrada = lstEntradas.SelectedItem.ToString();
             string id_entrada = "";
             string objeto = cbbObjeto.Text;
@@ -607,8 +637,19 @@ namespace ExpressionReader
                 m_dbConnection.Open();
                 SQLiteDataReader reader;
 
+                #region Select Grupo (id_grupo)
+                sql = "SELECT * FROM grupo WHERE nome='" + grupo + "'";
+                command = new SQLiteCommand(sql, m_dbConnection);
+                reader = command.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    id_grupo = (reader["id_grupo"]).ToString();
+                }
+                #endregion
+
                 #region Select Participante (id_participante)
-                sql = "SELECT * FROM participante WHERE nome='" + participante + "'";
+                sql = "SELECT * FROM participante WHERE id_grupo = " + id_grupo + " AND nome = '" + participante + "'";
                 command = new SQLiteCommand(sql, m_dbConnection);
                 reader = command.ExecuteReader();
 
@@ -617,7 +658,7 @@ namespace ExpressionReader
                 #endregion
 
                 #region Select Objeto (id_objeto)
-                sql = "SELECT * FROM objeto WHERE nome='" + objeto + "'";
+                sql = "SELECT * FROM objeto WHERE id_grupo = " + id_grupo + " AND nome='" + objeto + "'";
                 command = new SQLiteCommand(sql, m_dbConnection);
                 reader = command.ExecuteReader();
 
@@ -693,7 +734,95 @@ namespace ExpressionReader
 
         private void btnExcluir_Click(object sender, EventArgs e)
         {
+            string sql;
+            SQLiteCommand command;
+            SQLiteConnection m_dbConnection;
 
+            string entrada = "";
+            string id_entrada = "";
+            string participante = "";
+            string id_participante = "";
+            string objeto = cbbObjeto.Text;
+            string id_objeto = "";
+
+            if (lstEntradas.SelectedItems.Count > 0)
+            {
+                entrada = lstEntradas.SelectedItem.ToString();
+                //separa o nome do participante
+                int pFrom = entrada.IndexOf("(") + "(".Length;
+                int pTo = entrada.IndexOf(")");
+
+                participante = entrada.Substring(pFrom, pTo - pFrom);
+
+                DialogResult dialogResult = MessageBox.Show("Você deseja excluir a entrada do Participante: " + participante + "?", "Excluir", MessageBoxButtons.YesNo);
+                if (dialogResult == DialogResult.No)
+                {
+                    return;
+                }
+            }
+            else
+            {
+                MessageBox.Show("Selecione um item para excluir!");
+                return;
+            }
+
+            try
+            {
+                m_dbConnection = new SQLiteConnection("Data Source=apsa.sqlite;Version=3;");
+                m_dbConnection.Open();
+                SQLiteDataReader reader;
+
+                #region Select Participante (id_participante)
+                sql = "SELECT * FROM participante WHERE nome='" + participante + "'";
+                command = new SQLiteCommand(sql, m_dbConnection);
+                reader = command.ExecuteReader();
+
+                while (reader.Read())
+                    id_participante = (reader["id_participante"]).ToString();
+                #endregion
+
+                #region Select Objeto (id_objeto)
+                sql = "SELECT * FROM objeto WHERE nome='" + objeto + "'";
+                command = new SQLiteCommand(sql, m_dbConnection);
+                reader = command.ExecuteReader();
+
+                while (reader.Read())
+                    id_objeto = (reader["id_objeto"]).ToString();
+                #endregion
+
+                //Primeiro, temos que deletar as unidades que foram associadas a essa entrada.
+                //Então, selecionamos o id_entrada primeiro.
+
+                #region Select Entrada (id_entrada)
+                sql = "SELECT * FROM entrada WHERE id_participante=" + id_participante + " AND id_objeto = " + id_objeto;
+                command = new SQLiteCommand(sql, m_dbConnection);
+                reader = command.ExecuteReader();
+
+                //Conta quantos encontrou
+                while (reader.Read())
+                {
+                    id_entrada = (reader["id_entrada"]).ToString();
+                }
+                #endregion
+
+                sql = "DELETE FROM entrada_unidade WHERE id_entrada=" + id_entrada;
+                command = new SQLiteCommand(sql, m_dbConnection);
+                command.ExecuteReader();
+
+                sql = "DELETE FROM entrada WHERE id_entrada=" + id_entrada;
+                command = new SQLiteCommand(sql, m_dbConnection);
+                command.ExecuteReader();
+
+                m_dbConnection.Close();
+
+                MessageBox.Show("Excluída Entrada com Sucesso!");
+
+                Carrega_Entradas();
+            }
+            catch
+            {
+                MessageBox.Show("Erro! Não foi possível excluir!");
+            }
         }
 
         private void lstEntradas_DoubleClick(object sender, EventArgs e)

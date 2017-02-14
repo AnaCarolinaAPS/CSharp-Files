@@ -16,7 +16,7 @@ namespace ExpressionReader
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Quantificacao());
+            Application.Run(new MainMenu());
         }
     }
 }

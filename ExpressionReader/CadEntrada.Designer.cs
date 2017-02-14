@@ -91,6 +91,7 @@
             // 
             this.lstEntradas.Font = new System.Drawing.Font("Courier New", 8.25F);
             this.lstEntradas.FormattingEnabled = true;
+            this.lstEntradas.HorizontalScrollbar = true;
             this.lstEntradas.ItemHeight = 14;
             this.lstEntradas.Location = new System.Drawing.Point(19, 19);
             this.lstEntradas.Name = "lstEntradas";
@@ -115,6 +116,7 @@
             // 
             // cbbParticipante
             // 
+            this.cbbParticipante.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbbParticipante.FormattingEnabled = true;
             this.cbbParticipante.Location = new System.Drawing.Point(78, 19);
             this.cbbParticipante.Name = "cbbParticipante";

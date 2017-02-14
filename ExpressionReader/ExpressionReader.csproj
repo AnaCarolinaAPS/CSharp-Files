@@ -135,6 +135,18 @@
     <Compile Include="Quantificacao.Designer.cs">
       <DependentUpon>Quantificacao.cs</DependentUpon>
     </Compile>
+    <Compile Include="RelObjetos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="RelObjetos.Designer.cs">
+      <DependentUpon>RelObjetos.cs</DependentUpon>
+    </Compile>
+    <Compile Include="RelParticipante.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="RelParticipante.Designer.cs">
+      <DependentUpon>RelParticipante.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="CadEntrada.resx">
       <DependentUpon>CadEntrada.cs</DependentUpon>
     </EmbeddedResource>
@@ -164,6 +176,12 @@
     </Compile>
     <EmbeddedResource Include="Quantificacao.resx">
       <DependentUpon>Quantificacao.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RelObjetos.resx">
+      <DependentUpon>RelObjetos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RelParticipante.resx">
+      <DependentUpon>RelParticipante.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
