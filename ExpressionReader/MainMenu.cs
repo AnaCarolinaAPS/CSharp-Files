@@ -18,18 +18,228 @@ namespace ExpressionReader
             InitializeComponent();
         }
 
+        int qtdUnidades()
+        {
+            int nUnidade = 0;
+            string sql;
+            SQLiteCommand command;
+            SQLiteConnection m_dbConnection;
+
+            try
+            {
+                m_dbConnection = new SQLiteConnection("Data Source=apsa.sqlite;Version=3;");
+                m_dbConnection.Open();
+                SQLiteDataReader reader;
+
+                sql = "SELECT COUNT(*) FROM unidade";
+                command = new SQLiteCommand(sql, m_dbConnection);
+                reader = command.ExecuteReader();
+
+                /*Carrega os Grupos na ListView*/
+                while (reader.Read())
+                {
+                    nUnidade = Convert.ToInt32(reader["COUNT(*)"]);
+                }
+                m_dbConnection.Close();
+            }
+            catch
+            {
+                MessageBox.Show("Erro! Não foi possível abrir a base de dados!");
+            }
+
+            return nUnidade;
+        }
+
+        int qtdGrupos() {
+            int nGrupo = 0;
+            string sql;
+            SQLiteCommand command;
+            SQLiteConnection m_dbConnection;
+
+            try
+            {
+                m_dbConnection = new SQLiteConnection("Data Source=apsa.sqlite;Version=3;");
+                m_dbConnection.Open();
+                SQLiteDataReader reader;
+
+                sql = "SELECT COUNT(*) FROM grupo";
+                command = new SQLiteCommand(sql, m_dbConnection);
+                reader = command.ExecuteReader();
+
+                /*Carrega os Grupos na ListView*/
+                while (reader.Read())
+                {
+                    nGrupo = Convert.ToInt32(reader["COUNT(*)"]);
+                }
+                m_dbConnection.Close();
+            }
+            catch
+            {
+                MessageBox.Show("Erro! Não foi possível abrir a base de dados!");
+            }
+
+            return nGrupo;
+        }
+
+        int qtdParticipantes()
+        {
+            int nParticipante = 0;
+            string sql;
+            SQLiteCommand command;
+            SQLiteConnection m_dbConnection;
+
+            try
+            {
+                m_dbConnection = new SQLiteConnection("Data Source=apsa.sqlite;Version=3;");
+                m_dbConnection.Open();
+                SQLiteDataReader reader;
+
+                sql = "SELECT COUNT(*) FROM participante";
+                command = new SQLiteCommand(sql, m_dbConnection);
+                reader = command.ExecuteReader();
+
+                /*Carrega os Grupos na ListView*/
+                while (reader.Read())
+                {
+                    nParticipante = Convert.ToInt32(reader["COUNT(*)"]);
+                }
+                m_dbConnection.Close();
+            }
+            catch
+            {
+                MessageBox.Show("Erro! Não foi possível abrir a base de dados!");
+            }
+
+            return nParticipante;
+        }
+
+        int qtdObjetos()
+        {
+            int nObjeto = 0;
+            string sql;
+            SQLiteCommand command;
+            SQLiteConnection m_dbConnection;
+
+            try
+            {
+                m_dbConnection = new SQLiteConnection("Data Source=apsa.sqlite;Version=3;");
+                m_dbConnection.Open();
+                SQLiteDataReader reader;
+
+                sql = "SELECT COUNT(*) FROM objeto";
+                command = new SQLiteCommand(sql, m_dbConnection);
+                reader = command.ExecuteReader();
+
+                /*Carrega os Grupos na ListView*/
+                while (reader.Read())
+                {
+                    nObjeto = Convert.ToInt32(reader["COUNT(*)"]);
+                }
+                m_dbConnection.Close();
+            }
+            catch
+            {
+                MessageBox.Show("Erro! Não foi possível abrir a base de dados!");
+            }
+
+            return nObjeto;
+        }
+
+        int qtdEntradas()
+        {
+            int nEntrada = 0;
+            string sql;
+            SQLiteCommand command;
+            SQLiteConnection m_dbConnection;
+
+            try
+            {
+                m_dbConnection = new SQLiteConnection("Data Source=apsa.sqlite;Version=3;");
+                m_dbConnection.Open();
+                SQLiteDataReader reader;
+
+                sql = "SELECT COUNT(*) FROM entrada";
+                command = new SQLiteCommand(sql, m_dbConnection);
+                reader = command.ExecuteReader();
+
+                /*Carrega os Grupos na ListView*/
+                while (reader.Read())
+                {
+                    nEntrada = Convert.ToInt32(reader["COUNT(*)"]);
+                }
+                m_dbConnection.Close();
+            }
+            catch
+            {
+                MessageBox.Show("Erro! Não foi possível abrir a base de dados!");
+            }
+
+            return nEntrada;
+        }
+
+        int qtdEntradasUnidade()
+        {
+            int nEntrada = 0;
+            string sql;
+            SQLiteCommand command;
+            SQLiteConnection m_dbConnection;
+
+            try
+            {
+                m_dbConnection = new SQLiteConnection("Data Source=apsa.sqlite;Version=3;");
+                m_dbConnection.Open();
+                SQLiteDataReader reader;
+
+                sql = "SELECT COUNT(*) FROM entrada_unidade";
+                command = new SQLiteCommand(sql, m_dbConnection);
+                reader = command.ExecuteReader();
+
+                /*Carrega os Grupos na ListView*/
+                while (reader.Read())
+                {
+                    nEntrada = Convert.ToInt32(reader["COUNT(*)"]);
+                }
+                m_dbConnection.Close();
+            }
+            catch
+            {
+                MessageBox.Show("Erro! Não foi possível abrir a base de dados!");
+            }
+
+            return nEntrada;
+        }
+
         private void participanteToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            CadParticipante cad = new CadParticipante();
-            cad.MdiParent = this;
-            cad.Show();
+            if (qtdGrupos() <= 0)
+            {
+                MessageBox.Show("Não existem grupos cadastrados.\nPor favor, cadastre um grupo primeiro.", "Atenção");
+                CadGrupo cad = new CadGrupo();
+                cad.MdiParent = this.MdiParent;
+                cad.Show();
+            }
+            else {
+                CadParticipante cad = new CadParticipante();
+                cad.MdiParent = this;
+                cad.Show();
+            }
         }
 
         private void objetosToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            CadObjeto cad = new CadObjeto();
-            cad.MdiParent = this;
-            cad.Show();
+            if (qtdGrupos() <= 0)
+            {
+                MessageBox.Show("Não existem grupos cadastrados.\nPor favor, cadastre um grupo primeiro.", "Atenção");
+                CadGrupo cad = new CadGrupo();
+                cad.MdiParent = this.MdiParent;
+                cad.Show();
+            }
+            else
+            {
+                CadObjeto cad = new CadObjeto();
+                cad.MdiParent = this;
+                cad.Show();
+            }
         }
 
         private void gruposToolStripMenuItem_Click(object sender, EventArgs e)
@@ -48,23 +258,85 @@ namespace ExpressionReader
 
         private void entradasToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            CadEntrada cad = new CadEntrada();
-            cad.MdiParent = this;
-            cad.Show();
+            if (qtdGrupos() <= 0)
+            {
+                MessageBox.Show("Não existem grupos cadastrados.\nPor favor, cadastre um grupo primeiro.", "Atenção");
+                CadGrupo cad = new CadGrupo();
+                cad.MdiParent = this.MdiParent;
+                cad.Show();
+            }
+            else
+            {
+                if (qtdParticipantes() <= 0)
+                {
+                    MessageBox.Show("Não existem participantes cadastrados.\nPor favor, cadastre um participante primeiro.", "Atenção");
+                    CadParticipante cad = new CadParticipante();
+                    cad.MdiParent = this.MdiParent;
+                    cad.Show();
+                }
+                else
+                {
+                    if (qtdObjetos() <= 0)
+                    {
+                        MessageBox.Show("Não existem objetos cadastrados.\nPor favor, cadastre um objeto primeiro.", "Atenção");
+                        CadObjeto cad = new CadObjeto();
+                        cad.MdiParent = this.MdiParent;
+                        cad.Show();
+                    }
+                    else
+                    {
+                        CadEntrada cad = new CadEntrada();
+                        cad.MdiParent = this;
+                        cad.Show();
+                    }
+                }
+            }
         }
 
         private void resultadosToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            RelObjetos rel = new RelObjetos();
-            rel.MdiParent = this;
-            rel.Show();
+            if (qtdEntradas() <= 0)
+            {
+                MessageBox.Show("Não existem entradas cadastradas.\nPor favor, cadastre uma entrada primeiro.", "Atenção");
+                entradasToolStripMenuItem.PerformClick();
+            }
+            else
+            {
+                if (qtdEntradasUnidade() <= 0)
+                {
+                    MessageBox.Show("Não existem entradas qualificadas.\nPor favor, qualifique uma entrada primeiro.", "Atenção");
+                    entradasToolStripMenuItem.PerformClick();
+                }
+                else
+                {
+                    RelObjetos rel = new RelObjetos();
+                    rel.MdiParent = this;
+                    rel.Show();
+                }
+            }
         }
 
         private void resultadosToolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            RelParticipante rel = new RelParticipante();
-            rel.MdiParent = this;
-            rel.Show();
+            if (qtdEntradas() <= 0)
+            {
+                MessageBox.Show("Não existem entradas cadastradas.\nPor favor, cadastre uma entrada primeiro.", "Atenção");
+                entradasToolStripMenuItem.PerformClick();
+            }
+            else
+            {
+                if (qtdEntradasUnidade() <= 0)
+                {
+                    MessageBox.Show("Não existem entradas qualificadas.\nPor favor, qualifique uma entrada primeiro.", "Atenção");
+                    entradasToolStripMenuItem.PerformClick();
+                }
+                else
+                {
+                    RelParticipante rel = new RelParticipante();
+                    rel.MdiParent = this;
+                    rel.Show();
+                }
+            }            
         }
 
         private void sobreToolStripMenuItem_Click(object sender, EventArgs e)
