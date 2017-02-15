@@ -130,8 +130,18 @@ namespace ExpressionReader
             SQLiteCommand command;
             SQLiteConnection m_dbConnection;
 
-            string nome = lstGrupos.SelectedItem.ToString();
+            string nome = "";
             string descricao = "";
+
+            if (lstGrupos.SelectedItems.Count > 0)
+            {
+                nome = lstGrupos.SelectedItem.ToString();
+            }
+            else
+            {
+                MessageBox.Show("Selecione um item para alterar!", "Atenção");
+                return;
+            }
 
             try
             {
@@ -163,9 +173,19 @@ namespace ExpressionReader
             SQLiteCommand command;
             SQLiteConnection m_dbConnection;
 
-            string nome = lstGrupos.SelectedItem.ToString();
+            string nome = "";
             string id_grupo = "";
-            int nParticipantes = 0, nObjetos = 0, nEntradas = 0;        
+            int nParticipantes = 0, nObjetos = 0, nEntradas = 0;
+
+            if (lstGrupos.SelectedItems.Count > 0)
+            {
+                nome = lstGrupos.SelectedItem.ToString();
+            }
+            else
+            {
+                MessageBox.Show("Selecione um item para excluir!", "Atenção");
+                return;
+            }
 
             DialogResult dialog = MessageBox.Show("Você tem certeza que quer excluir o grupo " + nome + "?", "Exclusão", MessageBoxButtons.YesNo);
             if (dialog == DialogResult.No)

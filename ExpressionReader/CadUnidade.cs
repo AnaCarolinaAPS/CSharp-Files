@@ -130,8 +130,18 @@ namespace ExpressionReader
             SQLiteCommand command;
             SQLiteConnection m_dbConnection;
 
-            string nome = lstUnidades.SelectedItem.ToString();
+            string nome = "";
             string descricao = "";
+
+            if (lstUnidades.SelectedItems.Count > 0)
+            {
+                nome = lstUnidades.SelectedItem.ToString();
+            }
+            else
+            {
+                MessageBox.Show("Selecione um item para alterar!", "Atenção");
+                return;
+            }
 
             try
             {
@@ -165,7 +175,17 @@ namespace ExpressionReader
             SQLiteConnection m_dbConnection;
 
             string id_unidade = "";
-            string nome = lstUnidades.SelectedItem.ToString();
+            string nome = "";
+
+            if (lstUnidades.SelectedItems.Count > 0)
+            {
+                nome = lstUnidades.SelectedItem.ToString();
+            }
+            else
+            {
+                MessageBox.Show("Selecione um item para excluir!", "Atenção");
+                return;
+            }
 
             DialogResult dialog = MessageBox.Show("Você tem certeza que quer excluir a unidade " + nome + "?", "Exclusão", MessageBoxButtons.YesNo);
             if (dialog == DialogResult.No) {
