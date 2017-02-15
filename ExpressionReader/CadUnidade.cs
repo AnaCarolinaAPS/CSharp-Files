@@ -18,6 +18,43 @@ namespace ExpressionReader
             InitializeComponent();
         }
 
+        void Limpa_Campos()
+        {
+            txtNome.Text = "";
+            txtDescricao.Text = "";
+            txtNome.Focus();
+        }
+
+        void Carrega_Unidades()
+        {
+            string sql;
+            SQLiteCommand command;
+            SQLiteConnection m_dbConnection;
+
+            try
+            {
+                m_dbConnection = new SQLiteConnection("Data Source=apsa.sqlite;Version=3;");
+                m_dbConnection.Open();
+
+                sql = "SELECT * FROM unidade ORDER BY nome";
+                command = new SQLiteCommand(sql, m_dbConnection);
+                SQLiteDataReader reader = command.ExecuteReader();
+
+                //Limpa as unidades já carregadas
+                lstUnidades.Items.Clear();
+
+                //Adiciona todas as unidades encontradas no banco
+                while (reader.Read())
+                    lstUnidades.Items.Add(reader["nome"]);
+
+                m_dbConnection.Close();
+            }
+            catch
+            {
+                MessageBox.Show("Erro! Não foi possível acessar a base de dados!");
+            }
+        }
+
         private void CadUnidade_Load(object sender, EventArgs e)
         {
             Carrega_Unidades();
@@ -25,8 +62,7 @@ namespace ExpressionReader
         
         private void btnCancelar_Click(object sender, EventArgs e)
         {
-            txtNome.Text = "";
-            txtDescricao.Text = "";
+            Limpa_Campos();
         }
 
         private void btnCadastrar_Click(object sender, EventArgs e)
@@ -65,11 +101,20 @@ namespace ExpressionReader
                 m_dbConnection.Close();
 
                 Carrega_Unidades();
-                btnCancelar.PerformClick();
+                Limpa_Campos();
+
+                if (n > 0)
+                {
+                    MessageBox.Show("Unidade atualizada com sucesso!");
+                }
+                else
+                {                    
+                    MessageBox.Show("Unidade cadastrada com sucesso!");
+                }
             }
             catch
             {
-                MessageBox.Show("Erro! Não foi possível inserir na base de dados!");
+                MessageBox.Show("Erro! Não foi possível acessar a base de dados!");
             }
         }
 
@@ -102,7 +147,7 @@ namespace ExpressionReader
             }
             catch
             {
-                MessageBox.Show("Erro! Não foi possível abrir a base de dados!");
+                MessageBox.Show("Erro! Não foi possível acessar a base de dados!");
             }
 
         }
@@ -114,7 +159,12 @@ namespace ExpressionReader
             SQLiteConnection m_dbConnection;
 
             string nome = lstUnidades.SelectedItem.ToString();
-            
+
+            DialogResult dialog = MessageBox.Show("Você tem certeza que quer excluir a unidade " + nome + "?", "Exclusão", MessageBoxButtons.YesNo);
+            if (dialog == DialogResult.No) {
+                return;
+            } // Se sim, continua a função
+
             try
             {
                 m_dbConnection = new SQLiteConnection("Data Source=apsa.sqlite;Version=3;");
@@ -127,10 +177,12 @@ namespace ExpressionReader
                 m_dbConnection.Close();
 
                 Carrega_Unidades();
+
+                MessageBox.Show("Unidade " + nome + " excluída com sucesso!");
             }
             catch
             {
-                MessageBox.Show("Erro! Não foi excluir a unidade!");
+                MessageBox.Show("Erro! Não foi possível acessar a base de dados!");
             }
         }
 
@@ -141,36 +193,5 @@ namespace ExpressionReader
                 btnAlterar.PerformClick();
             }
         }
-
-        void Carrega_Unidades()
-        {
-            string sql;
-            SQLiteCommand command;
-            SQLiteConnection m_dbConnection;
-
-            try
-            {
-                m_dbConnection = new SQLiteConnection("Data Source=apsa.sqlite;Version=3;");
-                m_dbConnection.Open();
-
-                sql = "SELECT * FROM unidade ORDER BY nome";
-                command = new SQLiteCommand(sql, m_dbConnection);
-                SQLiteDataReader reader = command.ExecuteReader();
-
-                //Limpa as unidades já carregadas
-                lstUnidades.Items.Clear();
-
-                //Adiciona todas as unidades encontradas no banco
-                while (reader.Read())
-                    lstUnidades.Items.Add(reader["nome"]);
-
-                m_dbConnection.Close();
-            }
-            catch
-            {
-                MessageBox.Show("Erro! Não foi possível abrir a base de dados!");
-            }
-        }
-       
     }
 }
