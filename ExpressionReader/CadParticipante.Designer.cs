@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.ListViewGroup listViewGroup1 = new System.Windows.Forms.ListViewGroup("lala", System.Windows.Forms.HorizontalAlignment.Left);
+            System.Windows.Forms.ListViewGroup listViewGroup2 = new System.Windows.Forms.ListViewGroup("lala", System.Windows.Forms.HorizontalAlignment.Left);
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.btnAlterar = new System.Windows.Forms.Button();
             this.btnExcluir = new System.Windows.Forms.Button();
@@ -48,6 +48,8 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox2.Controls.Add(this.btnAlterar);
             this.groupBox2.Controls.Add(this.btnExcluir);
             this.groupBox2.Controls.Add(this.lstParticipantes);
@@ -60,43 +62,50 @@
             // 
             // btnAlterar
             // 
+            this.btnAlterar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnAlterar.Location = new System.Drawing.Point(19, 224);
             this.btnAlterar.Name = "btnAlterar";
             this.btnAlterar.Size = new System.Drawing.Size(75, 23);
-            this.btnAlterar.TabIndex = 2;
+            this.btnAlterar.TabIndex = 6;
             this.btnAlterar.Text = "<< Alterar";
             this.btnAlterar.UseVisualStyleBackColor = true;
             this.btnAlterar.Click += new System.EventHandler(this.btnAlterar_Click);
             // 
             // btnExcluir
             // 
+            this.btnExcluir.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnExcluir.Location = new System.Drawing.Point(102, 224);
             this.btnExcluir.Name = "btnExcluir";
             this.btnExcluir.Size = new System.Drawing.Size(75, 23);
-            this.btnExcluir.TabIndex = 1;
+            this.btnExcluir.TabIndex = 7;
             this.btnExcluir.Text = "Excluir";
             this.btnExcluir.UseVisualStyleBackColor = true;
             this.btnExcluir.Click += new System.EventHandler(this.btnExcluir_Click);
             // 
             // lstParticipantes
             // 
-            listViewGroup1.Header = "lala";
-            listViewGroup1.Name = "listViewGroup1";
+            this.lstParticipantes.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            listViewGroup2.Header = "lala";
+            listViewGroup2.Name = "listViewGroup1";
             this.lstParticipantes.Groups.AddRange(new System.Windows.Forms.ListViewGroup[] {
-            listViewGroup1});
+            listViewGroup2});
             this.lstParticipantes.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None;
             this.lstParticipantes.Location = new System.Drawing.Point(19, 17);
             this.lstParticipantes.MultiSelect = false;
             this.lstParticipantes.Name = "lstParticipantes";
             this.lstParticipantes.Size = new System.Drawing.Size(158, 201);
             this.lstParticipantes.Sorting = System.Windows.Forms.SortOrder.Ascending;
-            this.lstParticipantes.TabIndex = 4;
+            this.lstParticipantes.TabIndex = 5;
             this.lstParticipantes.UseCompatibleStateImageBehavior = false;
             this.lstParticipantes.View = System.Windows.Forms.View.SmallIcon;
             this.lstParticipantes.DoubleClick += new System.EventHandler(this.lstParticipantes_DoubleClick);
             // 
             // groupBox1
             // 
+            this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox1.Controls.Add(this.cbbGrupo);
             this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Controls.Add(this.btnCancelar);
@@ -114,12 +123,14 @@
             // 
             // cbbGrupo
             // 
+            this.cbbGrupo.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.cbbGrupo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbbGrupo.FormattingEnabled = true;
             this.cbbGrupo.Location = new System.Drawing.Point(50, 71);
             this.cbbGrupo.Name = "cbbGrupo";
             this.cbbGrupo.Size = new System.Drawing.Size(230, 21);
-            this.cbbGrupo.TabIndex = 6;
+            this.cbbGrupo.TabIndex = 2;
             // 
             // label3
             // 
@@ -132,37 +143,43 @@
             // 
             // btnCancelar
             // 
+            this.btnCancelar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnCancelar.Location = new System.Drawing.Point(9, 224);
             this.btnCancelar.Name = "btnCancelar";
             this.btnCancelar.Size = new System.Drawing.Size(75, 23);
-            this.btnCancelar.TabIndex = 2;
+            this.btnCancelar.TabIndex = 3;
             this.btnCancelar.Text = "Cancelar";
             this.btnCancelar.UseVisualStyleBackColor = true;
             this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
             // 
             // btnCadastrar
             // 
+            this.btnCadastrar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnCadastrar.Location = new System.Drawing.Point(205, 224);
             this.btnCadastrar.Name = "btnCadastrar";
             this.btnCadastrar.Size = new System.Drawing.Size(75, 23);
-            this.btnCadastrar.TabIndex = 3;
+            this.btnCadastrar.TabIndex = 4;
             this.btnCadastrar.Text = "Salvar >>";
             this.btnCadastrar.UseVisualStyleBackColor = true;
             this.btnCadastrar.Click += new System.EventHandler(this.btnCadastrar_Click);
             // 
             // txtCurso
             // 
+            this.txtCurso.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.txtCurso.Location = new System.Drawing.Point(50, 45);
             this.txtCurso.Name = "txtCurso";
             this.txtCurso.Size = new System.Drawing.Size(230, 20);
-            this.txtCurso.TabIndex = 4;
+            this.txtCurso.TabIndex = 1;
             // 
             // txtNome
             // 
+            this.txtNome.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.txtNome.Location = new System.Drawing.Point(50, 19);
             this.txtNome.Name = "txtNome";
             this.txtNome.Size = new System.Drawing.Size(230, 20);
-            this.txtNome.TabIndex = 3;
+            this.txtNome.TabIndex = 0;
             // 
             // label1
             // 
@@ -189,8 +206,10 @@
             this.ClientSize = new System.Drawing.Size(510, 286);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
+            this.MinimumSize = new System.Drawing.Size(526, 325);
             this.Name = "CadParticipante";
-            this.Text = "CadParticipante";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "Participante - Cadastro";
             this.Load += new System.EventHandler(this.CadParticipante_Load);
             this.groupBox2.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);

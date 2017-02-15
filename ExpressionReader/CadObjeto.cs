@@ -27,6 +27,7 @@ namespace ExpressionReader
                 cbbGrupo.SelectedIndex = 0;
             }
             cbbGrupo.Enabled = true;
+            txtNome.Focus();
         }
 
         void Carrega_Objetos()
@@ -77,7 +78,7 @@ namespace ExpressionReader
             }
             catch
             {
-                MessageBox.Show("Erro! Não foi possível abrir a base de dados!");
+                MessageBox.Show("Erro! Não foi possível acessar a base de dados!");
             }
         }
 
@@ -100,8 +101,14 @@ namespace ExpressionReader
 
             string nome = txtNome.Text.ToString();
             string descricao = txtDescricao.Text.ToString();
-            string desc_grupo = cbbGrupo.SelectedItem.ToString();
+            string grupo = cbbGrupo.SelectedItem.ToString();
             string id_grupo = "";
+
+            if (txtNome.Text.Trim().Length <= 0)
+            {
+                MessageBox.Show("Digite um nome ou identificador para cadastrar um Objeto de Estudo!", "Atenção");
+                return;
+            }
 
             try
             {
@@ -109,7 +116,7 @@ namespace ExpressionReader
                 m_dbConnection.Open();
 
                 #region Select grupo
-                sql = "SELECT * FROM grupo WHERE nome='" + desc_grupo + "'";
+                sql = "SELECT * FROM grupo WHERE nome='" + grupo + "'";
                 command = new SQLiteCommand(sql, m_dbConnection);
                 SQLiteDataReader reader = command.ExecuteReader();
 
@@ -142,11 +149,22 @@ namespace ExpressionReader
 
                 m_dbConnection.Close();
 
-                Carrega_Objetos();                
+                Carrega_Objetos();
+
+                cbbGrupo.Text = grupo;
+
+                if (n > 0)
+                {
+                    MessageBox.Show("Objeto atualizado com sucesso!");
+                }
+                else
+                {
+                    MessageBox.Show("Objeto cadastrado com sucesso!");
+                }
             }
             catch
             {
-                MessageBox.Show("Erro! Não foi possível inserir na base de dados!");
+                MessageBox.Show("Erro! Não foi possível acessar a base de dados!");
             }
         }
 
@@ -210,7 +228,7 @@ namespace ExpressionReader
             }
             catch
             {
-                MessageBox.Show("Erro! Não foi possível abrir a base de dados!");
+                MessageBox.Show("Erro! Não foi possível acessar a base de dados!");
             }
         }
 
@@ -221,8 +239,10 @@ namespace ExpressionReader
             SQLiteConnection m_dbConnection;
 
             string nome = "";
+            string id_objeto = "";
             string grupo = "";
             string id_grupo = "";
+            int nEntradas = 0;
 
             if (lstObjetos.SelectedItems.Count > 0)
             {
@@ -236,6 +256,12 @@ namespace ExpressionReader
                 return;
             }
 
+            DialogResult dialog = MessageBox.Show("Você tem certeza que quer excluir o objeto " + nome + "?", "Exclusão", MessageBoxButtons.YesNo);
+            if (dialog == DialogResult.No)
+            {
+                return;
+            } // Se sim, continua a função
+
             try
             {
                 m_dbConnection = new SQLiteConnection("Data Source=apsa.sqlite;Version=3;");
@@ -243,16 +269,62 @@ namespace ExpressionReader
                 SQLiteDataReader reader;
 
                 #region Select Grupo (id_grupo)
-                /* Busca o nome do grupo para colocar no combobox*/
+                /* Busca o nome do grupo que está no combobox*/
                 sql = "SELECT * FROM grupo WHERE nome = '" + grupo + "'";
                 command = new SQLiteCommand(sql, m_dbConnection);
                 reader = command.ExecuteReader();
 
                 while (reader.Read())
                     id_grupo = (reader["id_grupo"]).ToString();
-
                 #endregion
 
+                #region Select Objeto (id_objeto)
+                /* Busca o id do objeto para verificar se há entradas para serem excluidas também*/
+                sql = "SELECT * FROM objeto WHERE nome='" + nome + "' AND id_grupo = " + id_grupo;
+                command = new SQLiteCommand(sql, m_dbConnection);
+                reader = command.ExecuteReader();
+
+                while (reader.Read())
+                    id_objeto = (reader["id_objeto"]).ToString();
+                #endregion
+
+                #region Seleciona todas as entradas referente aos objetos que serão excluídos
+                List<string> id_entradas = new List<string>();
+                sql = "SELECT * FROM entrada WHERE id_objeto = " + id_objeto;
+                command = new SQLiteCommand(sql, m_dbConnection);
+                reader = command.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    nEntradas++;
+                    id_entradas.Add(reader["id_entrada"].ToString());
+                }
+                #endregion
+
+                if (nEntradas > 0) {
+                    string quantidades = "";
+                    quantidades = "\n   + Entrada(s): " + nEntradas.ToString();
+                    dialog = MessageBox.Show("Existe(m): " + quantidades + "\nAssociada(s) ao Objeto " + nome + ".\nVocê tem certeza que deseja excluir?", "Exclusão", MessageBoxButtons.YesNo);
+                    if (dialog == DialogResult.No)
+                    {
+                        return;
+                    } // Se sim, continua a função
+                }
+
+                //Primeiro se retira as entrada_unidade
+                foreach (string id_entrada in id_entradas)
+                {
+                    sql = "DELETE FROM entrada_unidade WHERE id_entrada=" + id_entrada;
+                    command = new SQLiteCommand(sql, m_dbConnection);
+                    command.ExecuteReader();
+                }
+
+                //Segundo se retira as entradas
+                sql = "DELETE FROM entrada WHERE id_objeto=" + id_objeto;
+                command = new SQLiteCommand(sql, m_dbConnection);
+                command.ExecuteReader();
+
+                //Por último deleta o grupo
                 sql = "DELETE FROM objeto WHERE nome='" + nome + "' AND id_grupo = " + id_grupo;
                 command = new SQLiteCommand(sql, m_dbConnection);
                 command.ExecuteReader();
@@ -260,10 +332,14 @@ namespace ExpressionReader
                 m_dbConnection.Close();
 
                 Carrega_Objetos();
+
+                cbbGrupo.Text = grupo;
+
+                MessageBox.Show("Objeto de Estudo " + nome + " excluído com sucesso!");
             }
             catch
             {
-                MessageBox.Show("Erro! Não foi possível excluir o objeto!");
+                MessageBox.Show("Erro! Não foi possível acessar a base de dados!");
             }
         }
 

@@ -215,7 +215,7 @@ namespace ExpressionReader
             {
                 MessageBox.Show("Não existem grupos cadastrados.\nPor favor, cadastre um grupo primeiro.", "Atenção");
                 CadGrupo cad = new CadGrupo();
-                cad.MdiParent = this.MdiParent;
+                cad.MdiParent = this;
                 cad.Show();
             }
             else {
@@ -231,7 +231,7 @@ namespace ExpressionReader
             {
                 MessageBox.Show("Não existem grupos cadastrados.\nPor favor, cadastre um grupo primeiro.", "Atenção");
                 CadGrupo cad = new CadGrupo();
-                cad.MdiParent = this.MdiParent;
+                cad.MdiParent = this;
                 cad.Show();
             }
             else
@@ -262,7 +262,7 @@ namespace ExpressionReader
             {
                 MessageBox.Show("Não existem grupos cadastrados.\nPor favor, cadastre um grupo primeiro.", "Atenção");
                 CadGrupo cad = new CadGrupo();
-                cad.MdiParent = this.MdiParent;
+                cad.MdiParent = this;
                 cad.Show();
             }
             else
@@ -271,7 +271,7 @@ namespace ExpressionReader
                 {
                     MessageBox.Show("Não existem participantes cadastrados.\nPor favor, cadastre um participante primeiro.", "Atenção");
                     CadParticipante cad = new CadParticipante();
-                    cad.MdiParent = this.MdiParent;
+                    cad.MdiParent = this;
                     cad.Show();
                 }
                 else
@@ -280,7 +280,7 @@ namespace ExpressionReader
                     {
                         MessageBox.Show("Não existem objetos cadastrados.\nPor favor, cadastre um objeto primeiro.", "Atenção");
                         CadObjeto cad = new CadObjeto();
-                        cad.MdiParent = this.MdiParent;
+                        cad.MdiParent = this;
                         cad.Show();
                     }
                     else
