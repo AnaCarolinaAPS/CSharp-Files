@@ -247,17 +247,19 @@ namespace ExpressionReader
                     }
                 }
                 #endregion
-                
-                string quantidades = "";
-                quantidades = "\n   + Participante(s): " + nParticipantes.ToString();
-                quantidades = quantidades + "\n   + Objeto(s):" + nObjetos.ToString();
-                quantidades = quantidades + "\n   + Entrada(s): " + nEntradas.ToString();
 
-                dialog = MessageBox.Show("Existe(m): " + quantidades + "\nAssociada(s) ao Grupo " + nome + ".\nVocê tem certeza que deseja excluir?", "Exclusão", MessageBoxButtons.YesNo);
-                if (dialog == DialogResult.No)
-                {
-                    return;
-                } // Se sim, continua a função
+                if (nParticipantes + nObjetos + nEntradas > 0) {
+                    string quantidades = "";
+                    quantidades = "\n   + Participante(s): " + nParticipantes.ToString();
+                    quantidades = quantidades + "\n   + Objeto(s):" + nObjetos.ToString();
+                    quantidades = quantidades + "\n   + Entrada(s): " + nEntradas.ToString();
+
+                    dialog = MessageBox.Show("Existe(m): " + quantidades + "\nAssociada(s) ao Grupo " + nome + ".\nVocê tem certeza que deseja excluir?", "Exclusão", MessageBoxButtons.YesNo);
+                    if (dialog == DialogResult.No)
+                    {
+                        return;
+                    } // Se sim, continua a função
+                }
 
                 //Primeiro se retira as entrada_unidade
                 foreach (string id_entrada in id_entradas) {

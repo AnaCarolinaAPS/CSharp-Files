@@ -57,6 +57,8 @@
             // 
             // gpbLista
             // 
+            this.gpbLista.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.gpbLista.Controls.Add(this.btnAlterar);
             this.gpbLista.Controls.Add(this.btnExcluir);
             this.gpbLista.Controls.Add(this.lstEntradas);
@@ -69,26 +71,31 @@
             // 
             // btnAlterar
             // 
+            this.btnAlterar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnAlterar.Location = new System.Drawing.Point(19, 224);
             this.btnAlterar.Name = "btnAlterar";
             this.btnAlterar.Size = new System.Drawing.Size(75, 23);
-            this.btnAlterar.TabIndex = 2;
+            this.btnAlterar.TabIndex = 9;
             this.btnAlterar.Text = "<< Alterar";
             this.btnAlterar.UseVisualStyleBackColor = true;
             this.btnAlterar.Click += new System.EventHandler(this.btnAlterar_Click);
             // 
             // btnExcluir
             // 
+            this.btnExcluir.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnExcluir.Location = new System.Drawing.Point(102, 224);
             this.btnExcluir.Name = "btnExcluir";
             this.btnExcluir.Size = new System.Drawing.Size(75, 23);
-            this.btnExcluir.TabIndex = 1;
+            this.btnExcluir.TabIndex = 10;
             this.btnExcluir.Text = "Excluir";
             this.btnExcluir.UseVisualStyleBackColor = true;
             this.btnExcluir.Click += new System.EventHandler(this.btnExcluir_Click);
             // 
             // lstEntradas
             // 
+            this.lstEntradas.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.lstEntradas.Font = new System.Drawing.Font("Courier New", 8.25F);
             this.lstEntradas.FormattingEnabled = true;
             this.lstEntradas.HorizontalScrollbar = true;
@@ -96,11 +103,14 @@
             this.lstEntradas.Location = new System.Drawing.Point(19, 19);
             this.lstEntradas.Name = "lstEntradas";
             this.lstEntradas.Size = new System.Drawing.Size(158, 186);
-            this.lstEntradas.TabIndex = 0;
+            this.lstEntradas.TabIndex = 8;
             this.lstEntradas.DoubleClick += new System.EventHandler(this.lstEntradas_DoubleClick);
             // 
             // gpbEntrada
             // 
+            this.gpbEntrada.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.gpbEntrada.Controls.Add(this.cbbParticipante);
             this.gpbEntrada.Controls.Add(this.btnCancelar);
             this.gpbEntrada.Controls.Add(this.btnCadastrar);
@@ -116,40 +126,47 @@
             // 
             // cbbParticipante
             // 
+            this.cbbParticipante.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.cbbParticipante.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbbParticipante.FormattingEnabled = true;
             this.cbbParticipante.Location = new System.Drawing.Point(78, 19);
             this.cbbParticipante.Name = "cbbParticipante";
             this.cbbParticipante.Size = new System.Drawing.Size(202, 21);
-            this.cbbParticipante.TabIndex = 6;
+            this.cbbParticipante.TabIndex = 2;
             // 
             // btnCancelar
             // 
+            this.btnCancelar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnCancelar.Location = new System.Drawing.Point(9, 224);
             this.btnCancelar.Name = "btnCancelar";
             this.btnCancelar.Size = new System.Drawing.Size(75, 23);
-            this.btnCancelar.TabIndex = 2;
+            this.btnCancelar.TabIndex = 4;
             this.btnCancelar.Text = "Cancelar";
             this.btnCancelar.UseVisualStyleBackColor = true;
             this.btnCancelar.Click += new System.EventHandler(this.btnCancelar_Click);
             // 
             // btnCadastrar
             // 
+            this.btnCadastrar.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnCadastrar.Location = new System.Drawing.Point(205, 224);
             this.btnCadastrar.Name = "btnCadastrar";
             this.btnCadastrar.Size = new System.Drawing.Size(75, 23);
-            this.btnCadastrar.TabIndex = 3;
+            this.btnCadastrar.TabIndex = 5;
             this.btnCadastrar.Text = "Salvar >>";
             this.btnCadastrar.UseVisualStyleBackColor = true;
             this.btnCadastrar.Click += new System.EventHandler(this.btnCadastrar_Click);
             // 
             // txtDescricao
             // 
+            this.txtDescricao.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.txtDescricao.Location = new System.Drawing.Point(9, 59);
             this.txtDescricao.Multiline = true;
             this.txtDescricao.Name = "txtDescricao";
             this.txtDescricao.Size = new System.Drawing.Size(271, 159);
-            this.txtDescricao.TabIndex = 4;
+            this.txtDescricao.TabIndex = 3;
             // 
             // label1
             // 
@@ -171,6 +188,8 @@
             // 
             // gpbUnidades
             // 
+            this.gpbUnidades.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.gpbUnidades.Controls.Add(this.btnInfo);
             this.gpbUnidades.Controls.Add(this.clbUnidades);
             this.gpbUnidades.Location = new System.Drawing.Point(304, 85);
@@ -182,24 +201,30 @@
             // 
             // btnInfo
             // 
+            this.btnInfo.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.btnInfo.Location = new System.Drawing.Point(60, 224);
             this.btnInfo.Name = "btnInfo";
             this.btnInfo.Size = new System.Drawing.Size(75, 23);
-            this.btnInfo.TabIndex = 3;
+            this.btnInfo.TabIndex = 7;
             this.btnInfo.Text = "Info";
             this.btnInfo.UseVisualStyleBackColor = true;
             this.btnInfo.Click += new System.EventHandler(this.btnInfo_Click);
             // 
             // clbUnidades
             // 
+            this.clbUnidades.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.clbUnidades.FormattingEnabled = true;
             this.clbUnidades.Location = new System.Drawing.Point(19, 19);
             this.clbUnidades.Name = "clbUnidades";
             this.clbUnidades.Size = new System.Drawing.Size(158, 199);
-            this.clbUnidades.TabIndex = 0;
+            this.clbUnidades.TabIndex = 6;
             // 
             // groupBox4
             // 
+            this.groupBox4.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox4.Controls.Add(this.cbbGrupo);
             this.groupBox4.Controls.Add(this.lblDescObj);
             this.groupBox4.Controls.Add(this.label6);
@@ -220,7 +245,7 @@
             this.cbbGrupo.Location = new System.Drawing.Point(133, 19);
             this.cbbGrupo.Name = "cbbGrupo";
             this.cbbGrupo.Size = new System.Drawing.Size(217, 21);
-            this.cbbGrupo.TabIndex = 6;
+            this.cbbGrupo.TabIndex = 0;
             this.cbbGrupo.SelectedIndexChanged += new System.EventHandler(this.cbbGrupo_SelectedIndexChanged);
             // 
             // lblDescObj
@@ -278,8 +303,10 @@
             this.Controls.Add(this.gpbUnidades);
             this.Controls.Add(this.gpbLista);
             this.Controls.Add(this.gpbEntrada);
+            this.MinimumSize = new System.Drawing.Size(730, 396);
             this.Name = "CadEntrada";
-            this.Text = "CadEntrada";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "Entrada de Dados - Cadastro";
             this.Load += new System.EventHandler(this.CadEntrada_Load);
             this.gpbLista.ResumeLayout(false);
             this.gpbEntrada.ResumeLayout(false);

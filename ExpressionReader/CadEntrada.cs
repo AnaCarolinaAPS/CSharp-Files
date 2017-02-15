@@ -30,6 +30,7 @@ namespace ExpressionReader
                 clbUnidades.SetItemCheckState(i, CheckState.Unchecked);
             }
             cbbParticipante.Enabled = true;
+            cbbGrupo.Focus();
         }
 
         void Carrega_Grupos()
@@ -65,7 +66,7 @@ namespace ExpressionReader
             }
             catch
             {
-                MessageBox.Show("Erro! Não foi possível abrir a base de dados!");
+                MessageBox.Show("Não foi possível acessar a base de dados!", "Erro");
             }
         }
 
@@ -114,7 +115,7 @@ namespace ExpressionReader
             }
             catch
             {
-                MessageBox.Show("Erro! Não foi possível abrir a base de dados!");
+                MessageBox.Show("Não foi possível acessar a base de dados!", "Erro");
             }
         }
 
@@ -163,7 +164,7 @@ namespace ExpressionReader
             }
             catch
             {
-                MessageBox.Show("Erro! Não foi possível abrir a base de dados!");
+                MessageBox.Show("Não foi possível acessar a base de dados!", "Erro");
             }
         }
 
@@ -198,7 +199,7 @@ namespace ExpressionReader
             }
             catch
             {
-                MessageBox.Show("Erro! Não foi possível abrir a base de dados!");
+                MessageBox.Show("Não foi possível acessar a base de dados!", "Erro");
             }
         }
 
@@ -305,7 +306,7 @@ namespace ExpressionReader
             }
             catch
             {
-                MessageBox.Show("Erro! Não foi possível abrir a base de dados!");
+                MessageBox.Show("Não foi possível acessar a base de dados!", "Erro");
             }
         }
 
@@ -382,7 +383,7 @@ namespace ExpressionReader
             }
             catch
             {
-                MessageBox.Show("Erro! Não foi possível abrir a base de dados!");
+                MessageBox.Show("Não foi possível acessar a base de dados!", "Erro");
             }
         }
 
@@ -397,6 +398,7 @@ namespace ExpressionReader
             {
                 cbbGrupo.SelectedIndex = 0;
             }
+            cbbGrupo.Focus();
         }
 
         private void btnCancelar_Click(object sender, EventArgs e)
@@ -436,14 +438,14 @@ namespace ExpressionReader
                 }
 
                 if (n == 0) {
-                    MessageBox.Show("Selecione uma unidade para saber mais sobre.");
+                    MessageBox.Show("Selecione pelo menos uma unidade para ver sua descrição.");
                 }
 
                 m_dbConnection.Close();
             }
             catch
             {
-                MessageBox.Show("Erro! Não foi possível abrir a base de dados!");
+                MessageBox.Show("Não foi possível acessar a base de dados!", "Erro");
             }            
         }
 
@@ -484,10 +486,10 @@ namespace ExpressionReader
                 x++;
             }
 
-            if (x == 0) {
-                MessageBox.Show("Selecione pelo menos uma unidade de análise.");
-                return;
-            }
+            //if (x == 0) {
+            //    MessageBox.Show("Selecione pelo menos uma unidade de análise.");
+            //    return;
+            //}
 
             try
             {
@@ -571,16 +573,16 @@ namespace ExpressionReader
                         id_unidade = (reader["id_unidade"]).ToString(); ;
                     #endregion
 
-                    n = 0;
+                    int z = 0;
                     sql = "SELECT * FROM entrada_unidade WHERE id_entrada=" + id_entrada + " AND id_unidade = " + id_unidade;
                     command = new SQLiteCommand(sql, m_dbConnection);
                     reader = command.ExecuteReader();
 
                     //Conta quantos encontrou
                     while (reader.Read())
-                        n++;
+                        z++;
 
-                    if (n == 0 && item.Value == 1)
+                    if (z == 0 && item.Value == 1)
                     {
                         sql = "INSERT INTO entrada_unidade (id_entrada, id_unidade, descricao) VALUES (" + id_entrada + " , " + id_unidade + ", 'teste')";
                     }
@@ -598,10 +600,19 @@ namespace ExpressionReader
                 m_dbConnection.Close();
 
                 Carrega_Entradas();
+
+                if (n > 0)
+                {
+                    MessageBox.Show("Entrada atualizada com sucesso!");
+                }
+                else
+                {
+                    MessageBox.Show("Entrada cadastrada com sucesso!");
+                }
             }
             catch
             {
-                MessageBox.Show("Erro! Não foi possível inserir na base de dados!");
+                MessageBox.Show("Não foi possível acessar a base de dados!", "Erro");
             }
         }
 
@@ -613,7 +624,7 @@ namespace ExpressionReader
 
             string grupo = cbbGrupo.Text;
             string id_grupo = "";
-            string entrada = lstEntradas.SelectedItem.ToString();
+            string entrada = "";
             string id_entrada = "";
             string objeto = cbbObjeto.Text;
             string id_objeto = "";
@@ -623,13 +634,23 @@ namespace ExpressionReader
             string unidade = "";
             string id_unidade = "";
 
-            //separa o nome do participante
-            int pFrom = entrada.IndexOf("(") + "(".Length;
-            int pTo = entrada.IndexOf(")");
-
-            participante = entrada.Substring(pFrom, pTo - pFrom);
 
             Limpa_Campos();
+
+            if (lstEntradas.SelectedItems.Count > 0)
+            {
+                entrada = lstEntradas.SelectedItem.ToString();
+                //separa o nome do participante
+                int pFrom = entrada.IndexOf("(") + "(".Length;
+                int pTo = entrada.IndexOf(")");
+
+                participante = entrada.Substring(pFrom, pTo - pFrom);
+            }
+            else
+            {
+                MessageBox.Show("Selecione um item para alterar!", "Atenção");
+                return;
+            }
 
             try
             {
@@ -728,7 +749,7 @@ namespace ExpressionReader
             }
             catch
             {
-                MessageBox.Show("Erro! Não foi possível abrir a base de dados!");
+                MessageBox.Show("Não foi possível acessar a base de dados!", "Erro");
             }
         }
 
@@ -752,19 +773,19 @@ namespace ExpressionReader
                 int pFrom = entrada.IndexOf("(") + "(".Length;
                 int pTo = entrada.IndexOf(")");
 
-                participante = entrada.Substring(pFrom, pTo - pFrom);
-
-                DialogResult dialogResult = MessageBox.Show("Você deseja excluir a entrada do Participante: " + participante + "?", "Excluir", MessageBoxButtons.YesNo);
-                if (dialogResult == DialogResult.No)
-                {
-                    return;
-                }
+                participante = entrada.Substring(pFrom, pTo - pFrom);                
             }
             else
             {
                 MessageBox.Show("Selecione um item para excluir!");
                 return;
             }
+
+            DialogResult dialog = MessageBox.Show("Você tem certeza que quer excluir a entrada do participante " + participante + "?", "Exclusão", MessageBoxButtons.YesNo);
+            if (dialog == DialogResult.No)
+            {
+                return;
+            } // Se sim, continua a função
 
             try
             {
