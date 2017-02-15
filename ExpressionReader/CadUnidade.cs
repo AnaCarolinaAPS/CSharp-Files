@@ -74,13 +74,19 @@ namespace ExpressionReader
             string nome = txtNome.Text.ToString();
             string descricao = txtDescricao.Text.ToString();
 
+            if (txtNome.Text.Trim().Length <= 0)
+            {
+                MessageBox.Show("Digite um nome ou identificador para cadastrar uma Unidade de Análise!", "Atenção");
+                return;
+            }
+
             try
             {
                 m_dbConnection = new SQLiteConnection("Data Source=apsa.sqlite;Version=3;");
                 m_dbConnection.Open();
 
                 int n = 0;
-                sql = "SELECT * FROM unidade where nome='" + nome + "'";
+                sql = "SELECT * FROM unidade WHERE nome='" + nome + "'";
                 command = new SQLiteCommand(sql, m_dbConnection);
                 SQLiteDataReader reader = command.ExecuteReader();
 
@@ -89,10 +95,10 @@ namespace ExpressionReader
                     n++;
 
                 if (n > 0) {
-                    sql = "UPDATE unidade set descricao = '" + descricao + "' where nome='" + nome + "'";
+                    sql = "UPDATE unidade SET descricao = '" + descricao + "' WHERE nome='" + nome + "'";
                 }
                 else {
-                    sql = "INSERT INTO unidade (id_unidade, nome, descricao) values (NULL, '" + nome + "' , '" + descricao + "')";
+                    sql = "INSERT INTO unidade (id_unidade, nome, descricao) VALUES (NULL, '" + nome + "' , '" + descricao + "')";
                 }
 
                 command = new SQLiteCommand(sql, m_dbConnection);
@@ -132,7 +138,7 @@ namespace ExpressionReader
                 m_dbConnection = new SQLiteConnection("Data Source=apsa.sqlite;Version=3;");
                 m_dbConnection.Open();
 
-                sql = "SELECT * FROM unidade where nome='" + nome + "'";
+                sql = "SELECT * FROM unidade WHERE nome='" + nome + "'";
                 command = new SQLiteCommand(sql, m_dbConnection);
                 SQLiteDataReader reader = command.ExecuteReader();
 
@@ -158,6 +164,7 @@ namespace ExpressionReader
             SQLiteCommand command;
             SQLiteConnection m_dbConnection;
 
+            string id_unidade = "";
             string nome = lstUnidades.SelectedItem.ToString();
 
             DialogResult dialog = MessageBox.Show("Você tem certeza que quer excluir a unidade " + nome + "?", "Exclusão", MessageBoxButtons.YesNo);
@@ -169,8 +176,42 @@ namespace ExpressionReader
             {
                 m_dbConnection = new SQLiteConnection("Data Source=apsa.sqlite;Version=3;");
                 m_dbConnection.Open();
+                SQLiteDataReader reader;
 
-                sql = "DELETE FROM unidade where nome='" + nome + "'";
+                #region Select Unidade (id_unidade)
+                sql = "SELECT * FROM unidade WHERE nome='" + nome + "'";
+                command = new SQLiteCommand(sql, m_dbConnection);
+                reader = command.ExecuteReader();
+
+                //Adiciona todas as unidades encontradas no banco
+                while (reader.Read())
+                    id_unidade = (reader["id_unidade"]).ToString();
+                #endregion
+
+                //Primeiro irá verificar se existem entradas associadas
+                #region Select Unidade (id_unidade)
+                sql = "SELECT * FROM entrada_unidade WHERE id_unidade=" + id_unidade;
+                command = new SQLiteCommand(sql, m_dbConnection);
+                reader = command.ExecuteReader();
+
+                int n = 0;
+                while (reader.Read())
+                    n++;
+                #endregion
+
+                dialog = MessageBox.Show("Existe(m) " + n.ToString() + " entrada(s) associada(s) a unidade " + nome + ".\nVocê tem certeza que deseja excluir?", "Exclusão", MessageBoxButtons.YesNo);
+                if (dialog == DialogResult.No)
+                {
+                    return;
+                } // Se sim, continua a função
+
+                //Deleta primeiro linhas associadas para não termos dados sem referência no banco
+                sql = "DELETE FROM entrada_unidade WHERE id_unidade=" + id_unidade;
+                command = new SQLiteCommand(sql, m_dbConnection);
+                command.ExecuteReader();
+
+                //Por último deleta a unidade
+                sql = "DELETE FROM unidade WHERE nome='" + nome + "'";
                 command = new SQLiteCommand(sql, m_dbConnection);
                 command.ExecuteReader();
               
