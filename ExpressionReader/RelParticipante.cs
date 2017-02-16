@@ -212,7 +212,6 @@ namespace ExpressionReader
                             id_entradas.Add((reader["id_entrada"]).ToString());
                         }
                         #endregion
-                        MessageBox.Show("id: " + id_participante);
                     }
 
                     string busca = "";
@@ -427,8 +426,6 @@ namespace ExpressionReader
                         }
                         #endregion
 
-                        //MessageBox.Show("Qtd Participantes: " + id_participantes.Count);
-
                         qtdEntrada = 0;
 
                         List<string> id_entradas = new List<string>();
@@ -461,6 +458,15 @@ namespace ExpressionReader
                 lblQtdEntradas.Text = "0 Nenhum participante nesse grupo possui entradas";
                 lstUnidades.Items.Clear();
             }
+        }
+
+        private void lstUnidades_Resize(object sender, EventArgs e)
+        {
+            ListView lv = (ListView)sender;
+            int size = lv.Width / 4;
+
+            lv.Columns[0].Width = size*3; //Coluna da Unidade é 3/4 do ListView
+            lv.Columns[1].Width = size-5; //Coluna da Unidade é 1/4 do ListView (-5 para que não fique com scrollbar)
         }
     }
 }

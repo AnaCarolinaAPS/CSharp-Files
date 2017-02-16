@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.ListViewItem listViewItem2 = new System.Windows.Forms.ListViewItem(new string[] {
+            System.Windows.Forms.ListViewItem listViewItem1 = new System.Windows.Forms.ListViewItem(new string[] {
             "Presença",
             "1"}, -1);
             this.groupBox4 = new System.Windows.Forms.GroupBox();
@@ -41,8 +41,6 @@
             this.cbbObjeto = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.btnAlterar = new System.Windows.Forms.Button();
-            this.btnExcluir = new System.Windows.Forms.Button();
             this.lstUnidades = new System.Windows.Forms.ListView();
             this.clmUnidade = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.clmQtd = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -52,6 +50,8 @@
             // 
             // groupBox4
             // 
+            this.groupBox4.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox4.Controls.Add(this.lblQtdParticipantes);
             this.groupBox4.Controls.Add(this.label2);
             this.groupBox4.Controls.Add(this.cbbGrupo);
@@ -92,7 +92,7 @@
             this.cbbGrupo.Location = new System.Drawing.Point(161, 19);
             this.cbbGrupo.Name = "cbbGrupo";
             this.cbbGrupo.Size = new System.Drawing.Size(217, 21);
-            this.cbbGrupo.TabIndex = 6;
+            this.cbbGrupo.TabIndex = 0;
             this.cbbGrupo.SelectedIndexChanged += new System.EventHandler(this.cbbGrupo_SelectedIndexChanged);
             // 
             // lblDescObj
@@ -143,8 +143,9 @@
             // 
             // groupBox2
             // 
-            this.groupBox2.Controls.Add(this.btnAlterar);
-            this.groupBox2.Controls.Add(this.btnExcluir);
+            this.groupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.groupBox2.Controls.Add(this.lstUnidades);
             this.groupBox2.Location = new System.Drawing.Point(12, 155);
             this.groupBox2.Name = "groupBox2";
@@ -153,26 +154,11 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Unidades de Análise";
             // 
-            // btnAlterar
-            // 
-            this.btnAlterar.Location = new System.Drawing.Point(19, 224);
-            this.btnAlterar.Name = "btnAlterar";
-            this.btnAlterar.Size = new System.Drawing.Size(75, 23);
-            this.btnAlterar.TabIndex = 2;
-            this.btnAlterar.Text = "<< Alterar";
-            this.btnAlterar.UseVisualStyleBackColor = true;
-            // 
-            // btnExcluir
-            // 
-            this.btnExcluir.Location = new System.Drawing.Point(102, 224);
-            this.btnExcluir.Name = "btnExcluir";
-            this.btnExcluir.Size = new System.Drawing.Size(75, 23);
-            this.btnExcluir.TabIndex = 1;
-            this.btnExcluir.Text = "Excluir";
-            this.btnExcluir.UseVisualStyleBackColor = true;
-            // 
             // lstUnidades
             // 
+            this.lstUnidades.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.lstUnidades.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.clmUnidade,
             this.clmQtd});
@@ -180,15 +166,16 @@
             this.lstUnidades.GridLines = true;
             this.lstUnidades.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
             this.lstUnidades.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem2});
+            listViewItem1});
             this.lstUnidades.Location = new System.Drawing.Point(19, 19);
             this.lstUnidades.MultiSelect = false;
             this.lstUnidades.Name = "lstUnidades";
             this.lstUnidades.Size = new System.Drawing.Size(405, 170);
             this.lstUnidades.Sorting = System.Windows.Forms.SortOrder.Ascending;
-            this.lstUnidades.TabIndex = 3;
+            this.lstUnidades.TabIndex = 2;
             this.lstUnidades.UseCompatibleStateImageBehavior = false;
             this.lstUnidades.View = System.Windows.Forms.View.Details;
+            this.lstUnidades.Resize += new System.EventHandler(this.lstUnidades_Resize);
             // 
             // clmUnidade
             // 
@@ -198,6 +185,7 @@
             // clmQtd
             // 
             this.clmQtd.Text = "Quantidade";
+            this.clmQtd.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.clmQtd.Width = 100;
             // 
             // RelObjetos
@@ -207,8 +195,10 @@
             this.ClientSize = new System.Drawing.Size(462, 370);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox4);
+            this.MinimumSize = new System.Drawing.Size(478, 409);
             this.Name = "RelObjetos";
-            this.Text = "RelObjetos";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "Unidades de Análise x Objetos - Relatório";
             this.Load += new System.EventHandler(this.RelObjetos_Load);
             this.groupBox4.ResumeLayout(false);
             this.groupBox4.PerformLayout();
@@ -227,8 +217,6 @@
         private System.Windows.Forms.ComboBox cbbObjeto;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.Button btnAlterar;
-        private System.Windows.Forms.Button btnExcluir;
         private System.Windows.Forms.ListView lstUnidades;
         private System.Windows.Forms.ColumnHeader clmUnidade;
         private System.Windows.Forms.ColumnHeader clmQtd;

@@ -124,7 +124,6 @@ namespace ExpressionReader
             SQLiteConnection m_dbConnection;
 
             string objeto = cbbObjeto.Text;
-            //string id_objeto = "";
             string grupo = cbbGrupo.Text;
             string id_grupo = "";
             string where = "";
@@ -184,8 +183,6 @@ namespace ExpressionReader
                     }
                     #endregion
 
-                    //MessageBox.Show("Quantidade de Objetos: " + id_objetos.Count);
-
                     List<string> id_entradas = new List<string>();
                     foreach (string id_objeto in id_objetos) {
                         #region Select entrada (id_entrada)
@@ -193,13 +190,9 @@ namespace ExpressionReader
                         command = new SQLiteCommand(sql, m_dbConnection);
                         reader = command.ExecuteReader();
 
-                        //MessageBox.Show("Id: " + id_objeto);
-
                         while (reader.Read())
                         {
                             id_entradas.Add((reader["id_entrada"]).ToString());
-                            //MessageBox.Show("Achou");
-                            //MessageBox.Show("id_entrada " + (reader["id_entrada"]).ToString() + " participante: " + (reader["id_participante"]).ToString() + " objeto: " + (reader["id_objeto"]).ToString());
                         }
                         #endregion
                     }
@@ -388,6 +381,15 @@ namespace ExpressionReader
         {
             Carrega_Grupos();
             cbbGrupo.SelectedIndex = 0;
+        }
+
+        private void lstUnidades_Resize(object sender, EventArgs e)
+        {
+            ListView lv = (ListView)sender;
+            int size = lv.Width / 4;
+
+            lv.Columns[0].Width = size * 3; //Coluna da Unidade é 3/4 do ListView
+            lv.Columns[1].Width = size - 5; //Coluna da Unidade é 1/4 do ListView (-5 para que não fique com scrollbar)
         }
     }
 }
