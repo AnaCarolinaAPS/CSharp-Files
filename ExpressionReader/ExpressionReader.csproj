@@ -118,6 +118,13 @@
     <Compile Include="CadUnidade.Designer.cs">
       <DependentUpon>CadUnidade.cs</DependentUpon>
     </Compile>
+    <Compile Include="FrmSobre.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmSobre.Designer.cs">
+      <DependentUpon>FrmSobre.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Hardworker.cs" />
     <Compile Include="MainMenu.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -147,6 +154,12 @@
     <Compile Include="RelParticipante.Designer.cs">
       <DependentUpon>RelParticipante.cs</DependentUpon>
     </Compile>
+    <Compile Include="Splash.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Splash.Designer.cs">
+      <DependentUpon>Splash.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="CadEntrada.resx">
       <DependentUpon>CadEntrada.cs</DependentUpon>
     </EmbeddedResource>
@@ -161,6 +174,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="CadUnidade.resx">
       <DependentUpon>CadUnidade.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmSobre.resx">
+      <DependentUpon>FrmSobre.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MainMenu.resx">
       <DependentUpon>MainMenu.cs</DependentUpon>
@@ -182,6 +198,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="RelParticipante.resx">
       <DependentUpon>RelParticipante.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Splash.resx">
+      <DependentUpon>Splash.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
@@ -208,6 +227,9 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="images\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\System.Data.SQLite.Core.1.0.104.0\build\net451\System.Data.SQLite.Core.targets" Condition="Exists('..\packages\System.Data.SQLite.Core.1.0.104.0\build\net451\System.Data.SQLite.Core.targets')" />

@@ -150,13 +150,13 @@
             this.cadastrosToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.unidadesToolStripMenuItem});
             this.cadastrosToolStripMenuItem.Name = "cadastrosToolStripMenuItem";
-            this.cadastrosToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.cadastrosToolStripMenuItem.Size = new System.Drawing.Size(126, 22);
             this.cadastrosToolStripMenuItem.Text = "Cadastros";
             // 
             // unidadesToolStripMenuItem
             // 
             this.unidadesToolStripMenuItem.Name = "unidadesToolStripMenuItem";
-            this.unidadesToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.unidadesToolStripMenuItem.Size = new System.Drawing.Size(123, 22);
             this.unidadesToolStripMenuItem.Text = "Unidades";
             this.unidadesToolStripMenuItem.Click += new System.EventHandler(this.unidadesToolStripMenuItem_Click);
             // 
@@ -176,8 +176,9 @@
             this.IsMdiContainer = true;
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "MainMenu";
-            this.Text = "CAQDAS";
+            this.Text = "SAAPC - Sistema de Apoio e Análise para Pesquisas Científicas";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
+            this.Load += new System.EventHandler(this.MainMenu_Load);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
